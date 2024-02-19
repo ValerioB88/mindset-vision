@@ -1,0 +1,76 @@
+[basic_info]
+# The path of the annotation file. The annotation files are generally at the top level of a dataset directory. Here a "column" in the annotation file is referred to as a "Factor" and the values this factors can take are "Levels". 
+annotation_file_path = ""
+# Specify which factor you are gonna compare across. Every image of every level of this factor is gonna be compared against every image in the reference_level level. For example, the annotation contains  the factor "ObjectSize" with levels "Large", "Small", "Medium". If we set factor_variable = "ObjectSize" and reference_level = "Medium", then each image of ObjectSize == Large and ObjectSize == Small will be compared with each other image of ObjectSize == "Medium".
+factor_variable = ""
+reference_level = ""
+
+## Select what columns you want to add to the final table, from the annotation.csv file. Two columns will be created for each factor specified, one for each image in the similarity pair. 
+add_columns = []
+# The comparison outlined above, utilizing the two configuration variables, can be further refined through the config parameter `match_factors`. Suppose we aim to compare images where `ObjectSize`= "Medium" against "Large" and "Small" images. But image we have another factor, called "Shape" (e.g. with levels "Square" and "Triangle"). We wish to make the "ObjectSize" comparisons on the condition that objects share the same "Shape" level.
+# That is, we want to make sure to compare LargeObject_Circle.png with MediumObject_Circle.png, and LargeObject_Square.png with MediumObject_Square.png. To do that, specify the factors that needs to match across comparison. E.g. match_factors = ["Shape"]. You can specify multiple match_factors.
+match_factors = []
+
+# Only compare pairs in which the following factors DO NOT match. For example, you want to only compare images with different shapes, then non_match_factors = ["Shape"]
+non_match_factors = []
+
+# Put here any filter you want to apply to the annotation file. For example, if you only want to consider those images for which the "Type" column is equal to "random" and the "ObjectNum" is equal to 23, write
+# filter_factor_level = {Type = "random", ObjectNum = 23}
+filter_factor_level = {}
+
+
+[options]
+# Either [euclidean] or [cossim] (cosine similarity)
+distance_metric = "euclidean"
+#  Supported networks: `alexnet`, `vgg11`, `vgg16`, `vgg11bn`, `vgg16bn`, `vgg19bn`, `resnet18`, `resnet50`, `resnet152`, `inception_v3` , `densenet121`, `densenet201`, `googlenet`. 
+architecture_name = "resnet152"
+# Specify against what layer we want to etract the network activation. A layer will be used if its module name contains any of the string in this list. For example, you could add "MaxP", "Relu" for saving the results of the MaxPooling or the ReLu layer. 
+save_layers = ["Conv2d", "Linear"]
+# If you have multiple GPUs, specify what GPU to use. If you want to run it on a CPU, write "cpu". 
+gpu_idx = 0
+# Whether to use the architecture version pretrained with ImageNet.
+imagenet_pretrained = true
+
+[network]
+# If you want to load a state_dict of a pretrained network, specify the path here. If you use this, "imagenet_pretraing" will be ignored. 
+state_dict_path = false
+
+[saving_folders]
+# Where to save the results of the analysis. 
+results_folder = "results/similarity_judgment/tmp"
+# Whether you want to create a folder inside the results_folder containing debugging images.
+save_debug_images = true
+
+[transformation]
+# When rotating/scaling the image, a "fill in" background will be used. Specify it here with a tuple of ints from 0 to 255. Default is black: (0, 0, 0). 
+fill_color = [0, 0, 0]
+# Teh similarity jugment task always compares pairs of images. With this parameter, specify whether the _same_ transformation  should be applied to both images of a comparion pair (e.g. rotate and translate both images by exactly the same amount). 
+matching_transform = true
+# How many times do we need to repeat a transformed sample. Only applies when you use some type of transformation.
+repetitions = 50
+
+# Whether we want to copy the images found in the folders onto a bigger canvas. The canvas background will be `fill_color`. The canvas will be `canvas_to_image_ratio` along the horizontal dimension, and it will be a square. For example, if the image is 100x50 pixels, it will be pasted onto a canvas large 300x300 pixels. 
+copy_on_bigger_canvas = false
+canvas_to_image_ratio = 3
+
+[transformation.values]
+# Specifies the range for applying each transformation, allowing for detailed transformation augmentation. 
+# For each transformation type (translation, scale, rotation), you can define a single range or multiple ranges.
+# A single range is defined by a list with minimum and maximum values.
+# Multiple ranges are defined by a list of lists, each specifying a different range.
+# For example:
+# - translation = [[-0.2, 0], [0.1, 0.5]] specifies two ranges for translation.
+# - scale = [0.7, 1.3] specifies a single range for scale.
+
+# You can be even more detailed with translation by specifying translation_X and translation_Y. 
+
+# An uniform random variable is drawn for each parameter within the specified ranges.
+# - Translation is expressed as a fraction of the image size for both horizontal and vertical translation.
+# - Scale represents the scaling factor, where 1 keeps the image size unchanged.
+# - Rotation is measured in degrees.
+# Set any of these to "false" to disable the respective transformation.
+
+translation_X = [-0.2, 0.2]
+translation_Y = [-0.2, 0.2]
+scale = [0.7, 1.3]
+rotation = [0, 360]

@@ -1,0 +1,684 @@
+# The Müller-Lyer illusion stimuli are procedurally generated in one of two `illusory' configurations (with inward or outward `fins') or in a `scrambled' configuration. In the latter, the fins are arranged randomly in the canvas, separated from the line segment. In all three conditions, we vary the line length, the position of the line, and the angle of the fins.
+["visual_illusions/muller_lyer_illusion"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Number of samples for the scrambled configuration, in which the arrow caps and the lines are randomly placed in the canvas
+num_samples_scrambled = 5000
+# Number of samples for the illusory configuration, with the standard Muller-Lyer illusion
+num_samples_illusory = 500
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/visual_illusions/muller_lyer_illusion"
+
+# We used a red and a blue shape arc shape, either one on top of the other at the centre of the canvas (`illusory' and `different lengths' conditions) or randomly placed in the canvas with a random orientation (`scrambled' condition). In the `scrambled' and `different lengths' conditions the two shapes have different sizes. The size is the same (thus eliciting the illusion) in the `illusory' condition. For all conditions, which shape is on top, the shapes' size, the shapes' curvature, and their position and orientation for the `scrambled' condition.
+["visual_illusions/jastrow_illusion"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Number of samples for the illusory configuration, with the two objects aligned vertically and with the same size
+num_samples_illusory = 50
+# Number of samples for condition in which the two objects are randomly placed in the canvas
+num_samples_random = 1000
+# Number of samples for a configuration in which the two objects are vertically aligned, but they don't have the same size
+num_samples_aligned = 50
+# Number of samples for condition in which the two objects are randomly placed in the canvas and they are the same size
+num_samples_random_same_size = 50
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/visual_illusions/jastrow_illusion"
+
+# A red target circle is surrounded by a fixed number of white circles (flankers) on a uniform background. In the two illusory conditions (`big' and `small' flankers) the flankers are disposed around the target circle, and they all have the same size within each sample. In the `scrambled' condition the target circle is still placed in the center, but white circles with random sizes are randomly placed on the canvas. Across illusory samples, we varied the radii of the flankers, the radius of the target circle, the displacement of the flankers around the target.
+["visual_illusions/ebbinghaus_illusion"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# How many samples to generated for the scrambled up conditions
+num_samples_scrambled = 5000
+# How many samples to generated for the illusory conditions (small and big flankers)
+num_samples_illusory = 50
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/visual_illusions/ebbinghaus_illusion"
+
+# This dataset simply consists of the Adelson Checker Shadow illusory image replicated many times, grayscaled, with a white arrow systematically placed at different locations of the canvas, covering the whole checkerboard. This dataset is supposed to be used in conjunction with a color-picker decoder, that is a decoder trained on the Grayscale Shape dataset.
+["visual_illusions/adelson_checkerboard_illusion"]
+# Specify whether we want to use antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# The arrow will be placed at every s steps.
+steps_arrow = 5
+# The size of the canvas. If called through command line, a string in the format NxM.
+canvas_size = [ 224, 224,]
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure used to create the dataset
+output_folder = "data/visual_illusions/adelson_checkerboard_illusion"
+# The background in grayscale value
+grayscale_background = 0
+
+# We include in MindSet: Vision two famous illusions related to lightness: the Lightness Contrast Illusion and the Adelson Checker Shadow Illusion. To facilitate testing for these and other lightness-related effects, we suggest using this dataset, whose purpose is not to elicit any illusion in humans or in DNNs but to train a network (or, with our suggested method, a decoder attached to a network) to output the grayscale value of a target pixel. Each image is composed of 20 overlapping items amongst the following types of shapes (circle, circle sector, circle segment, ellipse, rectangle with straight and rounded corners, heptagon, irregular polygon composed of a random number of edges from 3 to 10). Each shape is randomize according to their position, dimension, orientation, and grayscale filled color. We place 20 items to be sure that most space in the canvas is filled by some item, but in the end only few of them are visible. This results in a chaotic canvas with many different shapes with varying grayscale but with coherent pattern (as opposed to, for example, having each pixel of a different random grayscale value). In order to target a specific pixel to be predicted by the decoder, a small white vertical arrow (the `marker') of fixed size is placed randomly on the canvas. The arrow points to the pixel whose value can be used for prediction. Notice that while the images are commonly normalized from -1 to 1 before being fed into the network, the targeted pixel value to predict is in the 0-255 range.
+["visual_illusions/grayscale_shapes"]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = true
+# Each `sample` corresponds to an entire set of pair of shape_based_image_generation, for each condition.
+num_samples = 5000
+# The size of the canvas. If called through command line, a string in the format NxM.
+canvas_size = [ 224, 224,]
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure used to create the dataset
+output_folder = "data/visual_illusions/grayscale_shapes"
+
+# We provide a small face celebrity dataset using a subset of CelebA: https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html, but the user can specify any folder containing images of faces. Each image is resized according to parameters specified by the user and then reoriented into both an upright and a 180-degree inverted configuration. Furthermore, it is either 'Thatcherized' or unaltered. To `Thatcherize' an image we compute the landmarks of the eyes and the mouth, compute the bounding rectangle for each, and rotate them around their centre of mass. Blurring on the edge is applied to minimize artefacts.
+["visual_illusions/thatcher_illusion"]
+# The size of the canvas. If called through command line, a string in the format NxM.
+canvas_size = [ 224, 224,]
+# The folder containing faces that need to be Thatcherized. These faces will also be resized to `canvas_size` size.
+face_folder = "assets/celebA_sample/normal"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure used to create the dataset
+output_folder = "data/visual_illusions/thatcher_illusion"
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+
+# Two target lines (red and blue) are placed across a railway track pattern. In the `illusory' condition, the target lines have the same length (varying across samples). In the `scrambled' condition, the target lines have different length, are still placed horizontally one on top of the other, but all the other segments are randomly placed across the canvas. We include an additional condition, `different lengths`, in which the railway track pattern is used on target lines of different lengths. The railway track pattern for the `illusory' and `different lengths` conditions is composed of converging segments (with a varying degree of convergence), and horizontal segments (randomly placed at different horizontal position). For the three conditions, the user can specify the number of horizontal segments to use.
+["visual_illusions/ponzo_illusion"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Number of samples for the scrambled configuration, in which every line is randomly placed in the canvas. The target red and blue lines can be aligned vertically or be also placed randomly depending on the --rnd_target_lines argument
+num_samples_scrambled = 5000
+# Number of samples for the illusory configuration, with the two target lines having the same length
+num_samples_illusory = 500
+# This refers to the number of horizontal lines (excluding the target ed and blue lines) in the proper illusion shape_based_image_generation. During training, we generate dataset matching the total number of lines, so that this parameter will affect both test and train shape_based_image_generation. Notice that, since in the minimal illusion, two oblique lines are always present, similarly in the train shape_based_image_generation there are always two lines, to which we add a number of lines specified by this parameter
+num_rail_lines = 5
+# Specify whether the target red and blue lines in scrambled configuration should be randomly placed, or should be horizontal like in the testing (illusion) condition
+rnd_target_lines = false
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/visual_illusions/ponzo_illusion"
+
+# The dataset consists of the standard Lightness Contrast configuration of square within a uniform canvas, having two different grayscale values. The user can specify the grayscale value of the center square, which is kept fixed, while the value of the background is varied. Importantly, each sample is replicated many times with the white arrow marker placed at different location in the canvas. This simple configuration is modified so that it is easy to use in conjunction with a color-picker decoder, that is a decoder trained on the Grayscale Shape dataset.
+["visual_illusions/lightness_contrast_illusion"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# The arrow will be placed at every s steps.
+steps_arrow = 30
+# The color of the center square in grayscale int
+square_color = 200
+# It will generate items which background varies from 0 to 255 in steps specified by this parameter.
+steps_bg_color = 20
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure used to create the dataset
+output_folder = "data/visual_illusions/lightness_contrast_illusion"
+
+# We provide one illusory condition, in which an oriented grating pattern is presented within a circular mask (`center grating') and a differently oriented grating is placed as the background (`context' grating); and two non-illusory conditions: one in which the background is uniformly colored and only a center mask contains the oriented grating pattern; and vice versa. The samples are varied in their orientation and frequency of the gratings, and in the size of the central grating.
+["visual_illusions/tilt_illusion"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Number of samples with only the center grating
+num_samples_only_center = 1000
+# Number of samples with only the context grating
+num_samples_only_context = 1000
+# Number of samples for center and context grating
+num_samples_center_context = 1000
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/visual_illusions/tilt_illusion"
+
+# We used the stimuli from Torfs et al. (2014) who developed a set of simple stimuli where background lines camouflaged geometric shapes to various extents. REF: Torfs, Katrien, Kathleen Vancleef, Christophe Lafosse, Johan Wagemans, and Lee De-Wit. 'The Leuven Perceptual Organization Screening Test (L-POST), an Online Test to Assess Mid-Level Visual Perception'. Behavior Research Methods 46, no. 2 (5 November 2014): 472-87. https://doi.org/10.3758/S13428-013-0382-6/
+["shape_and_object_recognition/leuven_camouflaged_shapes"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/leuven_camouflaged_shapes"
+
+# This dataset consists of modification of line drawings (by default, we use line-drawings from Baker et al. (2018). The line drawings are 'dottified'. The user can specify the dots size and the distance between each dot. REF: Baker, Nicholas, Hongjing Lu, Gennady Erlikhman, and Philip J. Kellman. 'Deep Convolutional Networks Do Not Classify Based on Global Object Shape'. PLoS Computational Biology 14, no. 12 (2018): 1-43. https://doi.org/10.1371/journal.pcbi.1006613.
+["shape_and_object_recognition/dotted_linedrawings"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# A folder containing linedrawings. We assume these to be black strokes-on-white canvas simple contour drawings.
+linedrawing_input_folder = "assets/baker_2018_linedrawings/cropped/"
+# Distance between dots
+dot_distance = 5
+# Size of each dot
+dot_size = 1
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/dotted_linedrawings"
+
+# We use the ETH-80 dataset (https://github.com/chenchkx/ETH-80/tree/master), which contains 8 different categories (apples, cars, cows,cups, dogs, horses, pears and tomatoes), each consisting of 10 object instances, each object captured from 41 different viewpoints. The ETH-80 dataset is automatically downloaded when this dataset is generated, if not already present.
+["shape_and_object_recognition/viewpoint_invariance"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# A folder containing the original ETH-80 dataset. If the dataset is not present, it will be downloaded in this folder.
+ETH_80_folder = "assets/ETH_80"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/viewpoint_invariance"
+# Specify the value to which the longest side of the object will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# Limits of the azimuth viewpoints. For the ETH-80 dataset, they go from 0 to 338. Specify whether you want to only consider some values between A and B inclusive. If provided as a command line argument, use a string in the format A_B, e.g. 45_200.
+azimuth_lim = [ 0, 365,]
+# Limits of the inclination viewpoints. For the ETH-80 dataset, they go from 0 (top-view) to 90 (plane-view). Specify whether you want to only consider some values between A and B inclusive. If provided as a command line argument, use a string in the format A_B, e.g. 45_90.
+inclination_lim = [ 30, 90,]
+
+# We generate a dataset of silhouettes by using samples from Baker & Elder (2022) (9 classes from ImageNet, each class containing 40 samples). The user can specify any folder containing silhouettes. Alternatively, the user can also specify a folder containing line-drawings (black strokes on a white background), which will be converted into silhouettes. REF: Baker, Nicholas, and James H. Elder. 'Deep Learning Models Fail to Capture the Configural Nature of Human Shape Perception'. iScience 25, no. 9 (16 September 2022): 104913. https://doi.org/10.1016/J.ISCI.2022.104913.
+["shape_and_object_recognition/silhouettes.0"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# A folder containing the image input types (linedrawings/silhouettes). We assume these to be black strokes-on-white canvas simple contour drawings.
+image_input_folder = "assets/baker_2018_linedrawings/cropped/"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/silhouettes_from_linedrawings_baker_2018"
+# Either [silhouettes] or [linedrawings]. Default is [linedrawings]. Both are supposed to be blackstroke over a black canvas. If using linedrawings, they will first be converted into silhouettes.
+input_image_type = "linedrawings"
+
+# We generate a dataset of silhouettes by using samples from Baker & Elder (2022) (9 classes from ImageNet, each class containing 40 samples). The user can specify any folder containing silhouettes. Alternatively, the user can also specify a folder containing line-drawings (black strokes on a white background), which will be converted into silhouettes. REF: Baker, Nicholas, and James H. Elder. 'Deep Learning Models Fail to Capture the Configural Nature of Human Shape Perception'. iScience 25, no. 9 (16 September 2022): 104913. https://doi.org/10.1016/J.ISCI.2022.104913.
+["shape_and_object_recognition/silhouettes.1"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# A folder containing the image input types (linedrawings/silhouettes). We assume these to be black strokes-on-white canvas simple contour drawings.
+image_input_folder = "assets/baker_2022_silhouettes/cropped"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/silhouettes_from_silhouettes_baker_2022"
+# Either [silhouettes] or [linedrawings]. Default is [linedrawings]. Both are supposed to be blackstroke over a black canvas. If using linedrawings, they will first be converted into silhouettes.
+input_image_type = "silhouettes"
+
+# This dataset consists of simple line-drawings. We use the line-drawing stimuli from Baker et al. (2018), consisting of 36 classes from ImageNet (one line- drawing per class). The line-drawings are white stroke on a uniform canvas (black by default). The user can specify a different line-drawing folders, which should consist of images of black strokes on a white background. REF: Baker, Nicholas, Hongjing Lu, Gennady Erlikhman, and Philip J. Kellman. 'Deep Convolutional Networks Do Not Classify Based on Global Object Shape'. PLoS Computational Biology 14, no. 12 (2018): 1-43. https://doi.org/10.1371/journal.pcbi.1006613.
+["shape_and_object_recognition/linedrawings"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# A folder containing linedrawings. We assume these to be black strokes-on-white canvas simple contour drawings.
+linedrawing_input_folder = "assets/baker_2018_linedrawings/cropped/"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/linedrawings"
+
+# The dataset consists of texturized familiar objects by using as a base items the line drawings from Baker et al. (2018), but the user can specify a different folder oe line drawings (which should be images of black strokes on a white background). The texturization consists of lines placed at random degree. This is an alternative texturization method to the 'texturized_linedrawings_chars'. We suggest using the 'chars' method instead. REF: Baker, Nicholas, Hongjing Lu, Gennady Erlikhman, and Philip J. Kellman. 'Deep Convolutional Networks Do Not Classify Based on Global Object Shape'. PLoS Computational Biology 14, no. 12 (2018): 1-43. https://doi.org/10.1371/journal.pcbi.1006613.
+["shape_and_object_recognition/texturized_linedrawings_lines"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# A folder containing linedrawings. We assume these to be black strokes-on-white canvas simple contour drawings.
+linedrawing_input_folder = "assets/baker_2018_linedrawings/cropped/"
+# Number of different texturized sample for each image
+num_samples = 500
+# Specify the value to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# The desity of the pattern. The horizontal and vertical spacing are equal to line_length/density
+density = 1.8
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/texturized_linedrawings_lines"
+# Whether texturize the foreground
+texturize_foreground = true
+# Whether texturize the background
+texturize_background = false
+
+# This dataset is generated by applying random transformation to a set of images: rotation, translation, scale, and shear. We used the line drawings from Baker et al. (2018). The configurable parameters allow for a fine-grained analysis of the effect of each transformation: for each transformation dimension, the user can chose one or multiple ranges. For example, the scaling value can be specified to go from 0.2 to 0.5, and then from 0.8 to 1.2, leaving out the scaling values from 0.5 to 0.8 that could be used for a testing sample. As usual, the exact transformation parameters used for each image are reported in the annotation file. As in the previous datasets, the user can specify any folder containing line-drawings or silhouettes (or any image with a clear contour on a white background). REF: Baker, Nicholas, Hongjing Lu, Gennady Erlikhman, and Philip J. Kellman. 'Deep Convolutional Networks Do Not Classify Based on Global Object Shape'. PLoS Computational Biology 14, no. 12 (2018): 1-43. https://doi.org/10.1371/journal.pcbi.1006613.
+["shape_and_object_recognition/2d_transformations"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 255, 255, 255,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# A folder of input images
+input_folder = "assets/baker_2018_linedrawings/cropped/"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/2d_transformations"
+# Specify the value to which the longest side of the object will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# Maximum absolute fraction for horizontal translation, from -1 to 1. From commandline, use MIN_MAX.
+translation_X = [ -0.2, 0.2,]
+# Maximum absolute fraction for vertical translation, from -1 to 1. From commandline, use MIN_MAX.
+translation_Y = [ -0.2, 0.2,]
+# Scaling factor range, where 1 is the original scale. From commandline, use MIN_MAX.
+scale = [ 0.5, 0.9,]
+# Rotation range in degree. From commandline, use MIN_MAX
+rotation = [ 0, 360,]
+# Number of transformation for each object
+num_samples = 50
+
+# We developed our version of the Leuven Camouflaged Shapes from Torfs et al. (2014) by generating 5 irregular polygons and adding a set of lines to camouflage them. This consisted of pre-generated polygons and the polygons camouflaged by adding a variety of lines. Some of the added lines extends the lines that composed the polygon itself, and some have a slightly different slope than the polygon's lines. REF: Torfs, Katrien, Kathleen Vancleef, Christophe Lafosse, Johan Wagemans, and Lee De-Wit. 'The Leuven Perceptual Organization Screening Test (L-POST), an Online Test to Assess Mid-Level Visual Perception'. Behavior Research Methods 46, no. 2 (5 November 2014): 472-87. https://doi.org/10.3758/S13428-013-0382-6/
+["shape_and_object_recognition/camouflaged_shapes"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# The number of samples to generate for each (embedded) polygons
+num_samples = 100
+# The shape of the embedded size (in pixels)
+shape_size = 45
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/camouflaged_shapes"
+
+["shape_and_object_recognition/same_different_task"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Number of generated samples for each type of dataset and each same/different condition
+num_samples = 5000
+# Specify the type of datasets. It could be `all` or any of `regular`, `irregular`, `open`, `wider_line`, `rnd_color`, `filled`, `open_squares`, `rectangles`, `straight_lines`, `closed_squares`
+type_dataset = "all"
+# either a number (both shapes the same, specific size), or rnd1 (different random sizes across samples, but same size within samples), rnd2 (different random sizes within samples and across samples). Different sizes for each shape are only applied when it makes sense for the task.
+size_shapes = 20
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/same_different_task"
+
+# The dataset consists of texturized familiar objects, which consists of randomly generated blob-like shapes. The texturization consists of masking the internal contour of a line drawing/silhouette with a pattern of a repeated character with a randomized font size, rotated by a random degree. The character is randomly selected between an letters, digits, or punctuation. The user can specify the texturization of the background as well, although we have found that doing so will turn object recognition from trivial to very challenging, depending on the selected character, and thus suggest not using it. The user can specify the number of blobs to generate and texturize.
+["shape_and_object_recognition/texturized_blobs"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# The number of augmented samples to generate for each blob
+num_samples_per_blob = 5
+num_blobs = 10
+# Specify the value to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# The character to be used as background. Use `random` to use a random character for each sample
+background_char = " "
+# The character to be used as foreground. Write `random` to use a different character for each image
+foreground_char = "random"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/texturized_blobs"
+# If a number, it defines the size of the font for all images. It can be a string in the form A_B, in which case the size will be drawn from a uniform(A, B) distribution for each image
+font_size = [ 15, 20,]
+
+# We modified a dataset of line drawings (by default the line drawings in Baker et al. (2018), but the user can specify a different dataset). Each linedrawing is modified by generating complementary images that have complementary segments removed. These stimuli are generated by overlapping a grid on the line drawing and deleting complementary sections. The user can specify the grid orientation, the distance between each grid row and column, and thickness of each cell. To test whether DNNs achieve human-level recognition of segmented images, a standard ImageNet classification test can be performed. Importantly, humans find complementary images like these hard to distinguish, and indeed, complementary images produce equivalent priming to repeated images, highlighting how the visual system treats them as equivalent Biederman (1987). REF: Biederman, Irving. 'Recognition-by-Components: A Theory of Human Image Understanding'. Psychological Review 94, no. 2 (1987): 115-47. https://doi.org/10.1037/0033-295X.94.2.115. REF: Baker, Nicholas, Hongjing Lu, Gennady Erlikhman, and Philip J. Kellman. 'Deep Convolutional Networks Do Not Classify Based on Global Object Shape'. PLoS Computational Biology 14, no. 12 (2018): 1-43. https://doi.org/10.1371/journal.pcbi.1006613.
+["shape_and_object_recognition/segmented_images"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# A folder containing linedrawings. We assume these to be black strokes-on-white canvas simple contour drawings.
+linedrawing_input_folder = "assets/baker_2018_linedrawings/cropped"
+# Specify the value to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# The rotation of the grid, in angles.
+grid_degree = 45
+# The size of each cell of the grid (in pixels)
+grid_size = 8
+# The thickness of the grid (in pixels)
+grid_thickness = 4
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/segmented_images"
+
+# This dataset is inspired by Baker and Elder (2022). Instead of replicating their dataset , we wrote a script to automatically generate fragmented and `Frankenstein' versions of a silhouette or a line drawing. In the pre- generated version, we apply this script to the dataset (9 classes from ImageNet, each containing 40 samples), obtaining a dataset that is very similar to the aforementioned work. The user can specify their own line drawing or silhouette folder, to generate a different variety of fragmented or Frankenstein images. REF: Baker, Nicholas, and James H. Elder. 'Deep Learning Models Fail to Capture the Configural Nature of Human Shape Perception'. iScience 25, no. 9 (16 September 2022). https://doi.org/10.1016/J.ISCI.2022.104913.
+["shape_and_object_recognition/global_change.0"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# A folder containing the image input types (linedrawings/silhouettes). We assume these to be black strokes-on-white canvas simple contour drawings.
+image_input_folder = "assets/baker_2018_linedrawings/cropped/"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/global_change_from_linedrawings_baker_2018"
+# Use 1 to convert to silhouettes, 0 to not convert. Set to 0 if the images are already silhouettes!
+convert_to_silhouettes = 0
+
+# This dataset is inspired by Baker and Elder (2022). Instead of replicating their dataset , we wrote a script to automatically generate fragmented and `Frankenstein' versions of a silhouette or a line drawing. In the pre- generated version, we apply this script to the dataset (9 classes from ImageNet, each containing 40 samples), obtaining a dataset that is very similar to the aforementioned work. The user can specify their own line drawing or silhouette folder, to generate a different variety of fragmented or Frankenstein images. REF: Baker, Nicholas, and James H. Elder. 'Deep Learning Models Fail to Capture the Configural Nature of Human Shape Perception'. iScience 25, no. 9 (16 September 2022). https://doi.org/10.1016/J.ISCI.2022.104913.
+["shape_and_object_recognition/global_change.1"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# A folder containing the image input types (linedrawings/silhouettes). We assume these to be black strokes-on-white canvas simple contour drawings.
+image_input_folder = "assets/baker_2022_silhouettes/cropped"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/global_change_from_silhouettes_baker_2022"
+# Use 1 to convert to silhouettes, 0 to not convert. Set to 0 if the images are already silhouettes!
+convert_to_silhouettes = 0
+
+# This dataset is inspired by Baker and Elder (2022). Instead of replicating their dataset , we wrote a script to automatically generate fragmented and `Frankenstein' versions of a silhouette or a line drawing. In the pre- generated version, we apply this script to the dataset (9 classes from ImageNet, each containing 40 samples), obtaining a dataset that is very similar to the aforementioned work. The user can specify their own line drawing or silhouette folder, to generate a different variety of fragmented or Frankenstein images. REF: Baker, Nicholas, and James H. Elder. 'Deep Learning Models Fail to Capture the Configural Nature of Human Shape Perception'. iScience 25, no. 9 (16 September 2022). https://doi.org/10.1016/J.ISCI.2022.104913.
+["shape_and_object_recognition/global_change.2"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# A folder containing the image input types (linedrawings/silhouettes). We assume these to be black strokes-on-white canvas simple contour drawings.
+image_input_folder = "assets/baker_2018_linedrawings/cropped/"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/global_change_silhouettes_from_linedrawings_baker_2018"
+# Use 1 to convert to silhouettes, 0 to not convert. Set to 0 if the images are already silhouettes!
+convert_to_silhouettes = 1
+
+# The dataset consists of texturized familiar objects by using as a base items the line drawings from Baker et al. (2018), but the user can specify a different folder oe line drawings (which should be images of black strokes on a white background). The texturization consists of masking the internal contour of a line drawing/silhouette with a pattern of a repeated character with a randomized font size, rotated by a random degree. The character is randomly selected between an letters, digits, or punctuation. The user can specify the texturization of the background as well, although we have found that doing so will turn object recognition from trivial to very challenging, depending on the selected character, and thus suggest not using it. REF: Baker, Nicholas, Hongjing Lu, Gennady Erlikhman, and Philip J. Kellman. 'Deep Convolutional Networks Do Not Classify Based on Global Object Shape'. PLoS Computational Biology 14, no. 12 (2018): 1-43. https://doi.org/10.1371/journal.pcbi.1006613.
+["shape_and_object_recognition/texturized_linedrawings_chars"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# A folder containing linedrawings. We assume these to be black strokes-on-white canvas simple contour drawings.
+linedrawing_input_folder = "assets/baker_2018_linedrawings/cropped/"
+# The number of augmented samples to generate for each line drawings
+num_samples = 500
+# Specify the value to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# The character to be used as background. Use `random` to use a random character for each sample
+background_char = " "
+# The character to be used as foreground. Write `random` to use a different character for each image
+foreground_char = "random"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/texturized_linedrawings_chars"
+# If a number, it defines the size of the font for all images. It can be a string in the form A_B, in which case the size will be drawn from a uniform(A, B) distribution for each image
+font_size = [ 15, 20,]
+
+# A simple horizontal white line with varying length and brightness. Configurable parameters include line width, min/max length/brightnes
+["low_mid_level_vision/weber_law"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# The number of samples to generate for each length and brightness condition. This will vary the width, if width is [rnd]. If width is a specific value, num_samples_per_condition will be set to 1
+num_samples_per_condition = 50
+# The maximum line length (in pixels) to use
+max_line_length = 50
+# The minimum line length (in pixels) to use
+min_line_length = 5
+# The Interval line length to use
+interval_line_length = 1
+# The minumum grayscale value to use for the brightness condition
+min_grayscale = 50
+# The maximum grayscale value to use for the brightness condition
+max_grayscale = 255
+# The Interval grayscale value to use
+interval_grayscale = 20
+# Width of the line. [rnd] to use a random width, otherwise specify a value (in pixel).
+width = 2
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/low_mid_level_vision/weber_law"
+
+["low_mid_level_vision/contour_completion"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 100, 100, 100,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Each `sample` corresponds to an entire set of pair of shape_based_image_generation, for each condition.
+num_samples = 50
+# The color of the circle object. If called from command line, the RGB value must be a string in the form R_G_B, e.g. 255_0_125. Write `random` to have a random color.
+circle_color = [ 255, 255, 255,]
+# The color of the square object. If called from command line, the RGB value must be a string in the form R_G_B, e.g. 255_0_125. Write `random` to have a random color.
+square_color = [ 0, 0, 0,]
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/low_mid_level_vision/contour_completion"
+
+# 3D Geon stimuli originally used in Kayaert et al. (2003) and obtained from https://geon.usc.edu/~ori. A feature dimension (such as the curvature of a Geon) is altered from a singular value (e.g. straight contour with 0 curvature) to two different values (e.g. slightly curved or very curved). The `reference` condition is the item with the intermediate value; the `MP change` condition consists of the sample with a greater non-singular value (that is, from slight curvature to greater curvature, which corresponds to a MP change), and the `NAP` change condition includes the samples with the singular value (that is, from slight curvature to non curvature, which corresponds to a NAP change). REF:Kayaert, Greet, Irving Biederman, and Rufin Vogels. 'Shape Tuning in Macaque Inferior Temporal Cortex'. Journal of Neuroscience 23, no. 7 (1 April 2003): 3016-27. https://doi.org/10.1523/JNEUROSCI.23-07-03016.2003.
+["low_mid_level_vision/NAP_vs_MP_3D_geons.0"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the color of the shape. The shading will be preserved. Leave it empty to not change the color of the shape. Specify it as a rgb tuple in the format of 255_255_255
+stroke_color = ""
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/low_mid_level_vision/NAP_vs_MP_3D_geons_standard"
+# The folder containing the shapes.
+shape_folder = "assets/amir_geons/cropped/NAPvsMP"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+
+# 3D Geon stimuli originally used in Kayaert et al. (2003) and obtained from https://geon.usc.edu/~ori. A feature dimension (such as the curvature of a Geon) is altered from a singular value (e.g. straight contour with 0 curvature) to two different values (e.g. slightly curved or very curved). The `reference` condition is the item with the intermediate value; the `MP change` condition consists of the sample with a greater non-singular value (that is, from slight curvature to greater curvature, which corresponds to a MP change), and the `NAP` change condition includes the samples with the singular value (that is, from slight curvature to non curvature, which corresponds to a NAP change). REF:Kayaert, Greet, Irving Biederman, and Rufin Vogels. 'Shape Tuning in Macaque Inferior Temporal Cortex'. Journal of Neuroscience 23, no. 7 (1 April 2003): 3016-27. https://doi.org/10.1523/JNEUROSCI.23-07-03016.2003.
+["low_mid_level_vision/NAP_vs_MP_3D_geons.1"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the color of the shape. The shading will be preserved. Leave it empty to not change the color of the shape. Specify it as a rgb tuple in the format of 255_255_255
+stroke_color = ""
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/low_mid_level_vision/NAP_vs_MP_3D_geons_no_shades"
+# The folder containing the shapes.
+shape_folder = "assets/amir_geons/cropped/NAPvsMP_no_shades"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+
+# 3D Geon stimuli originally used in Kayaert et al. (2003) and obtained from https://geon.usc.edu/~ori. A feature dimension (such as the curvature of a Geon) is altered from a singular value (e.g. straight contour with 0 curvature) to two different values (e.g. slightly curved or very curved). The `reference` condition is the item with the intermediate value; the `MP change` condition consists of the sample with a greater non-singular value (that is, from slight curvature to greater curvature, which corresponds to a MP change), and the `NAP` change condition includes the samples with the singular value (that is, from slight curvature to non curvature, which corresponds to a NAP change). REF:Kayaert, Greet, Irving Biederman, and Rufin Vogels. 'Shape Tuning in Macaque Inferior Temporal Cortex'. Journal of Neuroscience 23, no. 7 (1 April 2003): 3016-27. https://doi.org/10.1523/JNEUROSCI.23-07-03016.2003.
+["low_mid_level_vision/NAP_vs_MP_3D_geons.2"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the color of the shape. The shading will be preserved. Leave it empty to not change the color of the shape. Specify it as a rgb tuple in the format of 255_255_255
+stroke_color = ""
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/low_mid_level_vision/NAP_vs_MP_3D_geons_silhouettes"
+# The folder containing the shapes.
+shape_folder = "assets/amir_geons/cropped/NAPvsMP_silhouettes"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+
+# The dataset consists of images containing simple two parts. There are three `split' conditions and two `familiarity' conditions. The `split' conditions are: `no split` in which two parts are touching at one point but not overlapping; `natural split`, in which two parts are separated; `unnatural split` in which the two parts are touching each other as in the `no split` condition, but one of the parts is `cut' and separated from the rest. The items are silhouettes uniformly coloured on a uniform background, and they can be either familiar or unfamiliar shapes. The familiar shapes consist of the following objects: circle, square, rectangle, triangle, heptagon, and a 50-degree arc segment; the unfamiliar shapes consist of blob-like objects. Within each familiar/unfamiliar condition, all possible combinations of two shapes are used (e.g. a triangle with a rectangle). Configuration parameters include the distance between the pieces in the `unnatural split' and `natural split' condition, the colour of the items, and the number of different blob- like objects to use for the unfamiliar condition.
+["low_mid_level_vision/decomposition"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify by how much each image is separated (same values for the whole dataset)
+moving_distance = 60
+# Specify the color of the shapes (same across the whole dataset). Specify in R_G_B format, e.g. 255_0_0 for red
+shape_color = [ 255, 255, 255,]
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/low_mid_level_vision/decomposition"
+# Specify the number of unfamiliar shapes to use
+number_unfamiliar_shapes = 5
+
+# we recreated through vector graphics the stimuli appearing in Enns & Rensink (1991), using white strokes on a uniform background. REF:Enns, James T., and Ronald A. Rensink. 'Preattentive Recovery of Three-Dimensional Orientation from Line Drawing'. Psychological Review 98, no. 3 (1991): 335-51. https://doi.org/10.1037/0033-295X.98.3.335.
+["low_mid_level_vision/depth_drawings"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# A folder containing the Depth Perception stimuli from Enns and Rensink 1991.
+input_folder = "assets/enns_rensink_1991/pngs"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/low_mid_level_vision/depth_drawings"
+
+# We recreated through vector graphics the images originally contained in Hummel & Stankiewicz (1996), Experiment 5, using white strokes on a uniform background. REF: Hummel, John E., and Brian J. Stankiewicz. 'Categorical Relations in Shape Perception'. Spatial Vision 10, no. 3 (1996): 201-36. https://doi.org/10.1163/156856896X00141.
+["low_mid_level_vision/relational_vs_coordinate"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# A folder containing the hummel-stankiewicz stimuli
+input_folder = "assets/hummel_stankiewicz_1996/pngs"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/low_mid_level_vision/relational_vs_coordinate"
+
+# 2D line segments recreated through vector graphics based on Kubilius et al. 2017. A feature dimension (such as the curvature of a Geon) is altered from a singular value (e.g. straight contour with 0 curvature) to two different values (e.g. slightly curved or very curved). The `reference` condition is the item with the intermediate value; the `MP change` condition consists of the sample with a greater non-singular value (that is, from slight curvature to greater curvature, which corresponds to a MP change), and the `NAP` change condition includes the samples with the singular value (that is, from slight curvature to non curvature, which corresponds to a NAP change). REF: Kubilius, Jonas, Charlotte Sleurs, and Johan Wagemans. 'Sensitivity to Nonaccidental Configurations of Two-Line Stimuli'. I-Perception 8, no. 2 (1 April 2017): 1-12. https://doi.org/10.1177/2041669517699628/
+["low_mid_level_vision/NAP_vs_MP_2D_lines"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# A folder containing the NAP vs MP 2D lines stimuli.
+input_folder = "assets/kubilius_2017/pngs"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/low_mid_level_vision/NAP_vs_MP_2D_lines"
+
+# Based on Doerig & Herzog (2019), code adapted with authors' permission. Consists of a 'vernier' stimulus (two parallel lines segment with some offset) placed either inside or outside a set of random flankers (squares, circles, hexagons, octagons, stars, diamonds). Each configuration has from 1 to 7 columns and from 1 to 3 rows of flankers with a variety of same/different shape patterns used. The vernier can be left/right oriented. User can specify whether the size of the flankers vary or is fixed across samples. REF: Doerig, A †, and A † Herzog. 'Crowding Reveals Fundamental Differences in Local vs. Global Processing in Humans and Machines', n.d. Accessed 18 May 2023.
+["low_mid_level_vision/un_crowding"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# The number of samples for each vernier type (left/right orientation) and condition. The vernier is places inside a flanker.
+num_samples_vernier_inside = 100
+# The number of samples for each vernier type (left/right orientation) and condition. The vernier is placed outside of the flankers
+num_samples_vernier_outside = 100
+# across samples
+random_size = true
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/low_mid_level_vision/un_crowding"
+
+# Adapted from Biscione & Bowers (2023). The dataset consisted of sets of paired images. Each set includes four conditions: a base condition (single dots), and composite conditions (orientation, proximity, and linearity). The `single dots` condition consists of paired images in which each image contains a single dot placed at a different location. In the composite conditions, one or more dots are added to both images of the base condition, in the same locations, in such a way that it would elicit different emergent properties when combined with the original single dots. In the orientation and proximity conditions, the added dot results in different orientation/proximity features. In the linearity condition (generated by adding a dot to the orientation condition), the added dot would either be placed on a straight line with the other two dots or on a different path. Each dot was constrained to be located at a distance of at least 20 pixels from one another, and 40 pixels from the border. REF:Biscione, Valerio, and Jeffrey S. Bowers. 'Mixed Evidence for Gestalt Grouping in Deep Neural Networks'. Computational Brain and Behavior 6, no. 3 (1 September 2023): 438-56. https://doi.org/10.1007/S42113-023-00169-2/.
+["low_mid_level_vision/emergent_features"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Each `sample` corresponds to an entire set of pair of shape_based_image_generation, for each condition.
+num_samples = 1000
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/low_mid_level_vision/emergent_features"

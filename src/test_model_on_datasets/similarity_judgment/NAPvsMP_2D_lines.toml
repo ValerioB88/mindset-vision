@@ -1,0 +1,22 @@
+[basic_info]
+annotation_file_path = 'datasets/low_mid_level_vision/NAPvsMP_2D_lines/annotation.csv'
+match_factors = ["SampleName"]
+factor_variable = "Type"
+reference_level = "reference"
+
+[options]
+pretraining = "ImageNet"
+
+[saving_folders]
+results_folder = "results/similarity_judgments/NAPvsMP_2D_lines"
+
+[transformation]
+fill_color = [0, 0, 0]
+matching_transform = true
+repetitions = 50
+
+[transformation.values]
+translation_X = [-0.2, 0.2]
+translation_Y = [-0.2, 0.2]
+scale = [0.8, 1.2]
+rotation = [-50, 50]

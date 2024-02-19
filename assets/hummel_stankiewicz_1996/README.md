@@ -1,0 +1,2 @@
+Stimuli were generated specifically for MindSet, by recreating the stimuli appearing in Experiment 5 of: 
+Hummel, J. E., & Stankiewicz, B. J. (1996). Categorical relations in shape perception. Spatial Vision, 10(3), 201–236. https://doi.org/10.1163/156856896X00141

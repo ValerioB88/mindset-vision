@@ -1,0 +1,1 @@
+This is a small subset of the CelebA dataset: https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html

@@ -1,0 +1,18 @@
+[basic_info]
+annotation_file_path = 'datasets/low_mid_level_vision/emergent_features/annotation.csv'
+match_factors = ['SampleId']
+filter_factor_level = { Type = "orientation" }
+factor_variable = "PairA/B"
+reference_level = "a"
+
+[options]
+pretraining = "ImageNet"
+
+[saving_folders]
+results_folder = "results/similarity_judgments/emergent_features/orientation"
+
+[transformation.values]
+translation = false
+scale = false
+rotation = false
+rotation = false

@@ -1,0 +1,50 @@
+# file types
+*.pdf
+*.pt
+*.bat
+*.svg 
+*.pyc
+.DS_Store
+*.pyc
+_dev.py
+experiments/*
+init
+examples/
+
+assets/ETH_80
+# specific directories
+**/__pycache__/
+**/.neptune/
+**/.pytest_cache/
+**/.ipynb_checkpoints/
+.idea/
+*.DS_Store
+.bk*
+# directories with exceptions
+models/*
+!models/.gitkeep
+
+results/*
+!results/.gitkeep
+
+datasets/*
+datasets_*/
+!datasets/.gitkeep
+data/*
+
+private/*
+temp/*
+
+# specific files
+.bashrc*
+.env
+
+# macOS specific
+Icon*
+
+.vscode/*
+
+# ignore pngs in tests folder
+tests/**/*.png
+tests/**/*.csv
+tests/**/*.toml

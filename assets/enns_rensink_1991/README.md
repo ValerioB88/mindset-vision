@@ -1,0 +1,2 @@
+Stimuli were generated specifically for MindSet, by recreating some of the stimuli appearing in: 
+Enns, J. T., & Rensink, R. A. (1991). Preattentive recovery of three-dimensional orientation from line drawings. Psychological Review, 98(3), 335–351. doi:10.1037/0033-295x.98.3.335 

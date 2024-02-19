@@ -1,0 +1,47 @@
+# Specify what GPU index to use. Write "cpu" to run on CPU. 
+gpu_num = 0
+
+[network]
+#  Supported networks: `alexnet`, `vgg11`, `vgg16`, `vgg11bn`, `vgg16bn`, `vgg19bn`, `resnet18`, `resnet50`, `resnet152`, `inception_v3` , `densenet121`, `densenet201`, `googlenet`. 
+architecture_name = "resnet152"
+# Whether to use the architecture version pretrained with ImageNet.
+imagenet_pretrained = true
+# If you want to load a state_dict of a pretrained network, specify the path here. If you use this, "imagenet_pretraing" will be ignored. 
+state_dict_path = false
+# The batch size used during classification
+batch_size = 64
+
+
+# Example of validation datasets. Note that these are based on an annotation.csv file, created together with every dataset in MindSet. In the annotation file there is always a "Path" factor which contains the path of each image, and many factors. You need to specify which factor to use for classification in `label_cols`. 
+# Furthermore, you can use only a portion opf the annotation file by using filters. In the example below only rows where FactorX = "blabla" will be used. You can use multiple filters.
+# [[eval.datasets]]
+# name = "name_val1"
+# annotation_file = ""
+# img_path_col_name = "Path"
+# label_cols = ["ImageNetClassIdx"]
+# filters = {} # or filters = { FactorX = "blabla"} 
+
+# You can use more than one validation dataset. The network will evealuated one at the time. 
+# [[eval.datasets]]
+# name = "name_val2"
+# annotation_file = ""
+# img_path_col_name = "Path"
+# label_cols = ["val2"]
+# filters = { FactorX = "blabla"}
+
+
+[saving_folders]
+# The paths for saving the results and the model. If false, no saving will occur. Notice that, during training.
+results_folder = 'results/imagenet_classification/'
+
+[transformation]
+# Fill color is the value used when performing transformations such as rotation. Will be ignored if no transformation is applied. 
+fill_color = [0, 0, 0]
+
+[transformation.values]
+# The range to which apply each transformation. An uniform random variable will be drawn for each parameter. Translation is expressed in fraction of the image size for both horizontal and vertical translation. Scale represents the scaling factor (1 will leave the image unchanged). Rotation is in degree
+# Set each one of these to "false" to not apply the respective transformation. 
+translation_X = false
+translation_Y = false
+scale = false
+rotation = false

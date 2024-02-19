@@ -1,0 +1,15 @@
+gpu_idx = 0
+
+[network]
+architecture_name = "resnet152"
+
+[[eval.datasets]]
+name = "linedrawings"
+annotation_file = "examples/data/shape_and_object_recognition/linedrawings/annotation_w_imagenet_idxs.csv" 
+img_path_col_name = "Path"
+label_cols = ["ImageNetClassIdx"]
+filters = {}
+
+
+[saving_folders]
+results_folder = 'examples/results/imagenet_classification/linedrawings/'
