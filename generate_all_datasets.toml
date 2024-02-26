@@ -504,7 +504,7 @@ width = 2
 # The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
 output_folder = "data/low_mid_level_vision/weber_law"
 
-["low_mid_level_vision/contour_completion"]
+["low_mid_level_vision/amodal_completion"]
 # The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
 canvas_size = [ 224, 224,]
 # Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
@@ -520,7 +520,7 @@ circle_color = [ 255, 255, 255,]
 # The color of the square object. If called from command line, the RGB value must be a string in the form R_G_B, e.g. 255_0_125. Write `random` to have a random color.
 square_color = [ 0, 0, 0,]
 # The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
-output_folder = "data/low_mid_level_vision/contour_completion"
+output_folder = "data/low_mid_level_vision/amodal_completion"
 
 # 3D Geon stimuli originally used in Kayaert et al. (2003) and obtained from https://geon.usc.edu/~ori. A feature dimension (such as the curvature of a Geon) is altered from a singular value (e.g. straight contour with 0 curvature) to two different values (e.g. slightly curved or very curved). The `reference` condition is the item with the intermediate value; the `MP change` condition consists of the sample with a greater non-singular value (that is, from slight curvature to greater curvature, which corresponds to a MP change), and the `NAP` change condition includes the samples with the singular value (that is, from slight curvature to non curvature, which corresponds to a NAP change). REF:Kayaert, Greet, Irving Biederman, and Rufin Vogels. 'Shape Tuning in Macaque Inferior Temporal Cortex'. Journal of Neuroscience 23, no. 7 (1 April 2003): 3016-27. https://doi.org/10.1523/JNEUROSCI.23-07-03016.2003.
 ["low_mid_level_vision/NAP_vs_MP_3D_geons.0"]

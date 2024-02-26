@@ -31,7 +31,7 @@ datasets/*
 datasets_*/
 !datasets/.gitkeep
 data/*
-
+data_lite/*
 private/*
 temp/*
 

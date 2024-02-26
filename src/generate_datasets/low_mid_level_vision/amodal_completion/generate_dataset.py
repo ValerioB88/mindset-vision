@@ -49,9 +49,8 @@ class DrawCompletion(DrawStimuli):
         square_color,
         radius_circle,
         side_square,
-        notched=False,
+        center_notched=None,
         top="s",
-        notched_proportion=0.3,
     ):
         img = self.create_canvas()
         draw = Draw(img)
@@ -65,57 +64,52 @@ class DrawCompletion(DrawStimuli):
                     (x_c - radius_circle, y_c - radius_circle),
                     (x_c + radius_circle, y_c + radius_circle),
                 ],
-                outline=tuple(square_color),
+                outline=None,
                 fill=tuple(circle_color),
             )
-            if notched:
+            if center_notched is not None:
+                x_n, y_n = center_notched
+
                 draw.rectangle(
                     [
                         (
-                            x_s
-                            - side_square / 2
-                            - side_square * notched_proportion * 0.75,
-                            y_s
-                            - side_square / 2
-                            - side_square * notched_proportion * 0.75,
+                            x_n - side_square / 2,
+                            y_n - side_square / 2,
                         ),
                         (
-                            x_s
-                            + side_square / 2
-                            + side_square * notched_proportion * 0.75,
-                            y_s
-                            + side_square / 2
-                            + side_square * notched_proportion * 0.75,
+                            x_n + side_square / 2,
+                            y_n + side_square / 2,
                         ),
                     ],
                     outline=self.background,
                     fill=self.background,
                 )
-                notched = False
+                center_notched = False
 
         draw.rectangle(
             [
                 (x_s - side_square / 2, y_s - side_square / 2),
                 (x_s + side_square / 2, y_s + side_square / 2),
             ],
-            outline=tuple(circle_color) if top == "s" else tuple(square_color),
+            outline=None,
             fill=tuple(square_color),
         )
 
         if top == "c":
-            if notched:
+            if center_notched is not None:
+                x_n, y_n = center_notched
                 draw.ellipse(
                     [
                         (
-                            x_c - radius_circle - radius_circle * notched_proportion,
-                            y_c - radius_circle - radius_circle * notched_proportion,
+                            x_n - radius_circle,
+                            y_n - radius_circle,
                         ),
                         (
-                            x_c + radius_circle + radius_circle * notched_proportion,
-                            y_c + radius_circle + radius_circle * notched_proportion,
+                            x_n + radius_circle,
+                            y_n + radius_circle,
                         ),
                     ],
-                    outline=self.background,
+                    outline=None,
                     fill=self.background,
                 )
 
@@ -124,7 +118,7 @@ class DrawCompletion(DrawStimuli):
                     (x_c - radius_circle, y_c - radius_circle),
                     (x_c + radius_circle, y_c + radius_circle),
                 ],
-                outline=tuple(square_color),
+                outline=None,
                 fill=tuple(circle_color),
             )
 
@@ -136,7 +130,7 @@ name_dataset = os.path.basename(os.path.dirname(__file__))
 
 DEFAULTS.update(
     {
-        "num_samples": 50,
+        "num_samples": 5,
         "circle_color": [255, 255, 255],
         "square_color": [0, 0, 0],
         "output_folder": f"data/{category_folder}/{name_dataset}",
@@ -246,7 +240,7 @@ def generate_all(
                     square_col,
                     radius_circle,
                     side_square,
-                    notched=False,
+                    center_notched=None,
                     top=top_shape,
                 )
                 unique_hex = uuid.uuid4().hex[:8]
@@ -269,12 +263,25 @@ def generate_all(
                 )
 
             # Generate occluded and notched
-            max_dist_occluded = vector_length(side_square, theta) + radius_circle
+            max_dist_occluded = vector_length(side_square, theta) + radius_circle * 0.8
             ll = np.random.uniform(radius_circle // 1.2, max_dist_occluded)
 
-            center_square = get_center_square(theta, ll)
             for notched in [True, False]:
+
                 for top_shape in top_shapes:
+                    center_circle = np.array(canvas_size) // 2
+                    center_square = get_center_square(theta, ll)
+                    if notched:
+                        if top_shape == "c":
+                            center_notched = center_circle
+                            center_circle = get_center_square(
+                                theta, -radius_circle * 0.4
+                            )
+                        elif top_shape == "s":
+                            center_notched = center_square
+                            center_square = get_center_square(theta, side_square * 1.4)
+                    else:
+                        center_notched = None
                     img = ds.draw(
                         center_circle,
                         center_square,
@@ -282,14 +289,15 @@ def generate_all(
                         square_col,
                         radius_circle,
                         side_square,
-                        notched=notched,
+                        center_notched=center_notched,
                         top=top_shape,
                     )
                     unique_hex = uuid.uuid4().hex[:8]
                     path = (
                         Path("notched" if notched else "occlusion")
-                        / f"{top_shape}_{unique_hex}.png"
+                        / f"{completed_samples}_{top_shape}_{unique_hex}.png"
                     )
+                    print(path)
                     img.save(output_folder / path)
                     writer.writerow(
                         [
