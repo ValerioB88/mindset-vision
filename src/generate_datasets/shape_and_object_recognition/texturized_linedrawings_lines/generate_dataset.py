@@ -219,7 +219,6 @@ def generate_all(
             ["Path", "Class", "BackgroundColor", "SlopeLine", "LineLength", "IterNum"]
         )
         for img_path in tqdm(image_files):
-            print(img_path)
             class_name = img_path.parent.stem
             image_name = img_path.stem
             for n in tqdm(range(num_samples), leave=False):

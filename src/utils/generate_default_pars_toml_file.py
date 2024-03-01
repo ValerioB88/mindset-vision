@@ -131,7 +131,6 @@ def parse_help_text(help_text):
     return description, args_dict
 
 
-import concurrent.futures
 from multiprocessing import Pool
 
 

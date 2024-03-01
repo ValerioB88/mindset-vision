@@ -192,7 +192,7 @@ class Shapes(ShapeCoreFunctions):
         vertices = chaikins_corner_cutting(vertices, smooth_iterations)
 
         self.draw.polygon(vertices, fill=self.color)
-        random.seed(current_seed)
+        random.setstate(current_seed)
         return self
 
 

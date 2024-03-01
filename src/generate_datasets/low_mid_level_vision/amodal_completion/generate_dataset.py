@@ -297,7 +297,6 @@ def generate_all(
                         Path("notched" if notched else "occlusion")
                         / f"{completed_samples}_{top_shape}_{unique_hex}.png"
                     )
-                    print(path)
                     img.save(output_folder / path)
                     writer.writerow(
                         [

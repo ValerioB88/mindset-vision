@@ -339,7 +339,6 @@ def apply_antialiasing(img: PIL.Image, amount=None):
 def delete_and_recreate_path(path: pathlib.Path):
     shutil.rmtree(path) if path.exists() else None
     path.mkdir(parents=True, exist_ok=True)
-    print(sty.fg.yellow + f"Recreating {path}." + sty.rs.fg)
 
 
 import random

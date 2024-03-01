@@ -171,7 +171,6 @@ def generate_all(
             for img_path in image_files:
                 class_name = img_path.parent.stem
                 image_name = img_path.stem
-                print(class_name)
                 img = ds.apply_grid_mask(
                     img_path,
                     grid_size,

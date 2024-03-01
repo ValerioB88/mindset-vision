@@ -18,7 +18,7 @@ def generate_datasets_from_toml_file(toml_file):
         dataset_params = toml.load(f)
 
     for dataset, params in tqdm(dataset_params.items()):
-        print(sty.fg.red + f"Generating {dataset}" + sty.rs.fg)
+        print(sty.fg.yellow + f"Generating {dataset}" + sty.rs.fg)
         file = str(
             Path("src")
             / "generate_datasets"
@@ -29,6 +29,7 @@ def generate_datasets_from_toml_file(toml_file):
         generate_all = getattr(importlib.import_module(module_path), "generate_all")
         # params = {k: tuple(v) if isinstance(v, list) else v for k, v in params.items()}
         generate_all(**params)
+    print(sty.fg.blue + "ALL DATASETS GENERATED!" + sty.fg.rs)
 
 
 if __name__ == "__main__":

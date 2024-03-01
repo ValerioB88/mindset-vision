@@ -10,7 +10,6 @@ import inspect
 
 from torchvision.transforms import transforms, InterpolationMode
 import sty
-from torch import rand
 from PIL import Image, ImageDraw
 from tqdm import tqdm
 from src.utils.drawing_utils import DrawStimuli

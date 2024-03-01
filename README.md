@@ -35,11 +35,23 @@ Both versions of the `MindSet: Vision` dataset are structured into folders, each
 Similarly, if your research or project requires datasets with more than the provided samples, you can regenerate the datasets with a specific sample size. 
 
 # Generate datasets from scratch
-We provide an intuitive interface to generate each dataset from scratch, allowing users to modify various parameters.
-Before proceeding, install all dependencies (in a new conda environment if you want): 
+We provide an intuitive interface to generate each dataset from scratch, allowing users to modify various parameters. To ensure compatibility, we recommend using Python 3.10, as this is the version we have tested our project with.
+
+Before proceeding, we suggest creating a new conda environment and installing all dependencies as follows:
+
 ```bash
+# Create a new conda environment named 'myenv' with Python 3.10
+conda create --name myenv python=3.10
+
+# Activate the newly created environment
+conda activate myenv
+
+# Install all required dependencies
 pip install -r requirements.txt
 ```
+Replace 'myenv' with your preferred environment name. This setup ensures that you have a clean environment specifically configured for this project. Given that MindSet: Vision has been rigorously tested with Python 3.10, we strongly advise using this Python version.
+
+
 There are two ways to generate the datasets: through a TOML file (which allows for batch generation of many datasets in one go), or by running the script for each dataset (as a a module) passing all arguments in the command line. The TOML approach is the reccomended one. 
 
 

@@ -212,7 +212,6 @@ def generate_all(
             ]
         )
         for img_path in tqdm(image_files):
-            print(img_path)
             for n in tqdm(range(num_samples), leave=False):
                 class_name = img_path.parent.stem
                 rotation_angle = random.randint(-60, 60)
