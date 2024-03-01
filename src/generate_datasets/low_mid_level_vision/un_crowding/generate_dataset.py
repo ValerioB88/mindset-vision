@@ -10,6 +10,8 @@ Main changes to the main code:
     - added optional arguments part for generating dataset from the command line
 """
 
+from cv2 import line
+import numpy as np
 import csv
 import uuid
 from pathlib import Path
@@ -24,10 +26,13 @@ from tqdm import tqdm
 
 import numpy as np
 import sty
-from skimage import draw
-from skimage.draw import circle_perimeter
 from scipy.ndimage import zoom
 from datetime import datetime
+from src.generate_datasets.low_mid_level_vision.un_crowding.utils import (
+    circle_perimeter,
+    polygon,
+    polygon_perimeter,
+)
 
 from src.utils.drawing_utils import DrawStimuli
 from src.utils.misc import (
@@ -35,6 +40,7 @@ from src.utils.misc import (
     add_general_args,
     delete_and_recreate_path,
 )
+from PIL import Image, ImageDraw
 
 from src.utils.misc import DEFAULTS as BASE_DEFAULTS
 
@@ -238,7 +244,7 @@ class DrawUncrowding(DrawStimuli):
                 + center[1]
             )
 
-        RR, CC = draw.polygon_perimeter(rowExtVertices, colExtVertices)
+        RR, CC = polygon_perimeter(rowExtVertices, colExtVertices)
         patch[RR, CC] = self.fill[:3]
         return patch
 
@@ -304,8 +310,8 @@ class DrawUncrowding(DrawStimuli):
                 )
             )
 
-        RR, CC = draw.polygon(row_ext_vertices, col_ext_vertices)
-        rr, cc = draw.polygon(row_int_vertices, col_int_vertices)
+        RR, CC = polygon(row_ext_vertices, col_ext_vertices)
+        rr, cc = polygon(row_int_vertices, col_int_vertices)
         patch[RR, CC] = self.fill[:3]
         patch[rr, cc] = self.background
 
@@ -347,8 +353,8 @@ class DrawUncrowding(DrawStimuli):
 
             angle += (random.random() + 0.5) * (2 * np.pi / n_sides_rough)
 
-        RR, CC = draw.polygon(row_ext_vertices, col_ext_vertices)
-        rr, cc = draw.polygon(row_int_vertices, col_int_vertices)
+        RR, CC = polygon(row_ext_vertices, col_ext_vertices)
+        rr, cc = polygon(row_int_vertices, col_int_vertices)
         patch[RR, CC] = self.fill[:3]
         patch[rr, cc] = self.background
 
@@ -362,7 +368,7 @@ class DrawUncrowding(DrawStimuli):
 
         for n in range(nLines):
             (r1, c1, r2, c2) = np.random.randint(self.shape_size, size=4)
-            rr, cc = draw.line(r1, c1, r2, c2)
+            rr, cc = line(r1, c1, r2, c2)
             patch[rr, cc] = self.fill[:3]
 
         return patch
