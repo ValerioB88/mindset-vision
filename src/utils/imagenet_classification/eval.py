@@ -3,7 +3,6 @@ import os
 import torch
 import torch.backends.cudnn as cudnn
 
-# from rich import print
 from src.utils.callbacks import *
 from src.utils.dataset_utils import ImageNetClasses, get_dataloader
 from src.utils.device_utils import set_global_device, to_global_device

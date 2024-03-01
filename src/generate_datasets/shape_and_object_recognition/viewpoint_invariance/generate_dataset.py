@@ -6,7 +6,6 @@ import inspect
 
 from tqdm import tqdm
 from pathlib import Path
-from src.tmp import crop
 from src.utils.drawing_utils import DrawStimuli, resize_image_keep_aspect_ratio
 from src.utils.misc import (
     add_general_args,

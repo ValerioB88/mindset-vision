@@ -26,6 +26,7 @@ DEFAULTS = {
     "num_samples": 5000,
     "canvas_size": [224, 224],
     "output_folder": f"data/{category_folder}/{name_dataset}",
+    "arrow_size": 1,
 }
 
 
@@ -35,6 +36,7 @@ def generate_all(
     canvas_size=DEFAULTS["canvas_size"],
     antialiasing=DEFAULTS["antialiasing"],
     behaviour_if_present=DEFAULTS["behaviour_if_present"],
+    arrow_size=DEFAULTS["arrow_size"],
 ):
     loc = locals()
     args = {i: loc[i] for i in inspect.getfullargspec(generate_all)[0]}
@@ -83,7 +85,7 @@ def generate_all(
             coord = tuple(
                 map(lambda x: int(x * img.canvas.size[0]), propose_coordinates)
             )
-            img.canvas = add_arrow(img.canvas, coord)
+            img.canvas = add_arrow(img.canvas, coord, arrow_size=arrow_size)
             img.canvas = apply_antialiasing(img) if antialiasing else img.canvas
             image_name = str(uuid.uuid4().hex[:8]) + ".png"
             img._shrink_and_save(save_as=output_folder / "all_images" / image_name)
@@ -121,6 +123,13 @@ if __name__ == "__main__":
         type=int,
         default=DEFAULTS["num_samples"],
         help="Each `sample` corresponds to an entire set of pair of shape_based_image_generation, for each condition.",
+    )
+    parser.add_argument(
+        "--arrow_size",
+        "-as",
+        type=float,
+        default=DEFAULTS["arrow_size"],
+        help="The size of the arrow to place in the canvas",
     )
     parser.add_argument(
         "--antialiasing",

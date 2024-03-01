@@ -561,9 +561,9 @@ class ColorPickerStimuli:
         return x * self.initial_image_width
 
 
-def add_arrow(canvas, coord: tuple[float, float], fill=255):
+def add_arrow(canvas, coord: tuple[float, float], fill=255, arrow_size=1):
     image_width = canvas.size[0]
-    resize_ratio = image_width / (4 * 224)
+    resize_ratio = arrow_size * image_width / (4 * 224)
 
     # configs for the arrow
     arrow_line_length = 45 * resize_ratio

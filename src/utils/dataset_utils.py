@@ -15,7 +15,6 @@ from torch.utils.data import DataLoader
 
 from PIL import Image
 from torchvision.transforms import functional as F
-from sklearn.preprocessing import MinMaxScaler
 
 
 def add_compute_stats(obj_class):
@@ -152,9 +151,13 @@ def compute_mean_and_std_from_dataset(
     dataset, dataset_path=None, max_iteration=100, data_loader=None, verbose=True
 ):
     if max_iteration < 30:
-        print(
-            "Max Iteration in Compute Mean and Std for dataset is lower than 30! This could create unrepresentative stats!"
-        ) if verbose else None
+        (
+            print(
+                "Max Iteration in Compute Mean and Std for dataset is lower than 30! This could create unrepresentative stats!"
+            )
+            if verbose
+            else None
+        )
     start = time()
     idxs = random.choices(range(len(dataset)), k=np.min((max_iteration, len(dataset))))
     imgs = [dataset[i][0] for i in idxs]  # item[0] and item[1] are image and its label
@@ -168,11 +171,15 @@ def compute_mean_and_std_from_dataset(
         "iter": max_iteration,
     }
 
-    print(
-        fg.cyan
-        + f'mean={np.around(stats["mean"],4)}, std={np.around(stats["std"], 4)}, time1it: {np.around(stats["time_one_iter"], 4)}s'
-        + rs.fg
-    ) if verbose else None
+    (
+        print(
+            fg.cyan
+            + f'mean={np.around(stats["mean"],4)}, std={np.around(stats["std"], 4)}, time1it: {np.around(stats["time_one_iter"], 4)}s'
+            + rs.fg
+        )
+        if verbose
+        else None
+    )
     if dataset_path is not None:
         print("Saving in {}".format(dataset_path))
         with open(dataset_path, "wb") as f:
@@ -194,18 +201,26 @@ def fix_dataset(dataset, transf_values, fill_color, name_ds=""):
     dataset.transform = torchvision.transforms.Compose(
         [
             AffineTransform(
-                transf_values["translation_X"]
-                if not transf_values["translation_X"] is False
-                else (0, 0),
-                transf_values["translation_Y"]
-                if not transf_values["translation_Y"] is False
-                else (0, 0),
-                transf_values["rotation"]
-                if not transf_values["rotation"] is False
-                else (0, 0),
-                transf_values["scale"]
-                if not transf_values["scale"] is False
-                else (1, 1),
+                (
+                    transf_values["translation_X"]
+                    if not transf_values["translation_X"] is False
+                    else (0, 0)
+                ),
+                (
+                    transf_values["translation_Y"]
+                    if not transf_values["translation_Y"] is False
+                    else (0, 0)
+                ),
+                (
+                    transf_values["rotation"]
+                    if not transf_values["rotation"] is False
+                    else (0, 0)
+                ),
+                (
+                    transf_values["scale"]
+                    if not transf_values["scale"] is False
+                    else (1, 1)
+                ),
                 fill_color=fill_color,
             ),
             torchvision.transforms.ToTensor(),
