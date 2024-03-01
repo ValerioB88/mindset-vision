@@ -47,9 +47,11 @@ def decoder_train(
     )
     toml_config["training"].update(
         {
-            "train_id": datetime.now().strftime("%d%m%Y_%H%M%S")
-            if not toml_config["training"]["train_id"]
-            else toml_config["training"]["train_id"],
+            "train_id": (
+                datetime.now().strftime("%d%m%Y_%H%M%S")
+                if not toml_config["training"]["train_id"]
+                else toml_config["training"]["train_id"]
+            ),
             "completed": False,
         }
     )
@@ -120,9 +122,11 @@ def decoder_train(
     net, _, _ = GrabNet.get_net(
         toml_config["network"]["architecture_name"],
         imagenet_pt=True if toml_config["network"]["imagenet_pretrained"] else False,
-        num_classes=len(train_loader.dataset.label_cols)
-        if toml_config["task_type"] == "regression"
-        else len(train_loader.dataset.classes),
+        num_classes=(
+            len(train_loader.dataset.label_cols)
+            if toml_config["task_type"] == "regression"
+            else len(train_loader.dataset.classes)
+        ),
     )
 
     num_decoders = len(net.decoders)
@@ -157,9 +161,13 @@ def decoder_train(
 
     net.train()
 
-    weblog_dataset_info(
-        train_loader, weblogger=weblogger, num_batches_to_log=1, log_text="train"
-    ) if weblogger else None
+    (
+        weblog_dataset_info(
+            train_loader, weblogger=weblogger, num_batches_to_log=1, log_text="train"
+        )
+        if weblogger
+        else None
+    )
 
     [
         weblog_dataset_info(
@@ -287,43 +295,55 @@ def decoder_train(
         ],
     ]
 
-    all_callbacks.append(
-        SaveModelAndOpt(
-            net,
-            str(model_output_folder_id),
-            loss_metric_name="ema_loss",
-            optimizers=optimizers,
-            at_epoch_end=toml_config["training"]["save_at_epoch_end"],
+    (
+        all_callbacks.append(
+            SaveModelAndOpt(
+                net,
+                str(model_output_folder_id),
+                loss_metric_name="ema_loss",
+                optimizers=optimizers,
+                at_epoch_end=toml_config["training"]["save_at_epoch_end"],
+            )
         )
-    ) if toml_config["training"]["save_trained_model"] else None
+        if toml_config["training"]["save_trained_model"]
+        else None
+    )
 
-    all_callbacks.append(
-        TriggerActionWhenReachingValue(
-            mode="min",
-            patience=20,
-            value_to_reach=toml_config["training"]["stopping_conditions"][
-                "stop_at_loss"
-            ],
-            check_every=10,
-            metric_name="ema_loss",
-            action=stop,
-            action_name=f"goal [{toml_config['training']['stopping_conditions']['stop_at_loss']}]",
+    (
+        all_callbacks.append(
+            TriggerActionWhenReachingValue(
+                mode="min",
+                patience=20,
+                value_to_reach=toml_config["training"]["stopping_conditions"][
+                    "stop_at_loss"
+                ],
+                check_every=10,
+                metric_name="ema_loss",
+                action=stop,
+                action_name=f"goal [{toml_config['training']['stopping_conditions']['stop_at_loss']}]",
+            )
         )
-    ) if toml_config["training"]["stopping_conditions"]["stop_at_loss"] else None
+        if toml_config["training"]["stopping_conditions"]["stop_at_loss"]
+        else None
+    )
 
-    all_callbacks.append(
-        TriggerActionWhenReachingValue(
-            mode="min",
-            patience=20,
-            value_to_reach=toml_config["training"]["stopping_conditions"][
-                "stop_at_accuracy"
-            ],
-            check_every=10,
-            metric_name="ema_loss",
-            action=stop,
-            action_name=f"goal [{toml_config['training']['stopping_conditions']['stop_at_accuracy']}]",
+    (
+        all_callbacks.append(
+            TriggerActionWhenReachingValue(
+                mode="min",
+                patience=20,
+                value_to_reach=toml_config["training"]["stopping_conditions"][
+                    "stop_at_accuracy"
+                ],
+                check_every=10,
+                metric_name="ema_loss",
+                action=stop,
+                action_name=f"goal [{toml_config['training']['stopping_conditions']['stop_at_accuracy']}]",
+            )
         )
-    ) if toml_config["training"]["stopping_conditions"]["stop_at_accuracy"] else None
+        if toml_config["training"]["stopping_conditions"]["stop_at_accuracy"]
+        else None
+    )
 
     net, logs = call_run(train_loader, True, all_callbacks, toml_config["task_type"])
     weblogger.stop() if weblogger else None

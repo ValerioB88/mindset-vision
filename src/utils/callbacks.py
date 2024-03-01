@@ -274,9 +274,11 @@ class TriggerActionWithPatience(Callback):
 
         if logs["tot_iter"] % self.check_every == 0:
             metrics = logs[self.metric_name].value
-            print(
-                f"Iter: {logs['tot_iter']}, Metric: {logs[self.metric_name]}"
-            ) if self.verbose else None
+            (
+                print(f"Iter: {logs['tot_iter']}, Metric: {logs[self.metric_name]}")
+                if self.verbose
+                else None
+            )
 
             if self.best is None:
                 self.best = metrics
@@ -288,9 +290,11 @@ class TriggerActionWithPatience(Callback):
             else:
                 self.num_bad_iters += 1
             print(f"Num Bad Iter: {self.num_bad_iters}") if self.verbose else None
-            print(f"Patience: {self.num_bad_iters}/{self.patience}") if (
-                self.verbose or self.patience - self.num_bad_iters < 20
-            ) else None
+            (
+                print(f"Patience: {self.num_bad_iters}/{self.patience}")
+                if (self.verbose or self.patience - self.num_bad_iters < 20)
+                else None
+            )
 
             if self.num_bad_iters >= self.patience:
                 print(f"Action triggered: {self.string}")
@@ -298,9 +302,13 @@ class TriggerActionWithPatience(Callback):
                 # needs to reset itself
                 self.num_bad_iters = 0
         else:
-            print(
-                f"Not updating now {self.check_every - (logs['tot_iter'] % self.check_every)}"
-            ) if self.verbose else None
+            (
+                print(
+                    f"Not updating now {self.check_every - (logs['tot_iter'] % self.check_every)}"
+                )
+                if self.verbose
+                else None
+            )
 
     def _init_is_better(self, mode, min_delta, percentage):
         if mode not in {"min", "max"}:
@@ -403,13 +411,17 @@ class SaveModelAndOpt(Callback):
 
     def save_model(self, path: pathlib.Path, print_it=True):
         # pathlib.Path(os.path.dirname(path)).mkdir(parents=True, exist_ok=True)
-        print(
-            fg.yellow
-            + ef.inverse
-            + "Saving MODEL in {}".format(path)
-            + rs.fg
-            + rs.inverse
-        ) if print_it else None
+        (
+            print(
+                fg.yellow
+                + ef.inverse
+                + "Saving MODEL in {}".format(path)
+                + rs.fg
+                + rs.inverse
+            )
+            if print_it
+            else None
+        )
         torch.save(
             self.net.state_dict(),
             path,
@@ -417,13 +429,17 @@ class SaveModelAndOpt(Callback):
 
     def save_optimizers(self, path: pathlib.Path, print_it=True):
         # pathlib.Path(os.path.dirname(path)).mkdir(parents=True, exist_ok=True)
-        print(
-            fg.yellow
-            + ef.inverse
-            + "Saving ALL OPTIMIZERS in {}".format(path)
-            + rs.fg
-            + rs.inverse
-        ) if print_it else None
+        (
+            print(
+                fg.yellow
+                + ef.inverse
+                + "Saving ALL OPTIMIZERS in {}".format(path)
+                + rs.fg
+                + rs.inverse
+            )
+            if print_it
+            else None
+        )
         torch.save(
             [opt.state_dict() for opt in self.optimizers],
             path,
@@ -736,9 +752,11 @@ class DuringTrainingTest(Callback):
         if (self.every_x_epochs is not None and epoch % self.every_x_epochs == 0) or (
             epoch == 0 and self.first_epoch_test
         ):
-            print(
-                f"\nTest every {self.every_x_epochs} epochs"
-            ) if self.every_x_epochs is not None else None
+            (
+                print(f"\nTest every {self.every_x_epochs} epochs")
+                if self.every_x_epochs is not None
+                else None
+            )
             self.run_tests(logs)
 
     def on_batch_end(self, batch, logs=None):
