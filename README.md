@@ -6,7 +6,7 @@
 **[MindSet Large on Kaggle](https://www.kaggle.com/datasets/mindsetvision/mindset)** (~1.3 GB)
 
 
-**[MindSet Lite on Kaggle](https://www.kaggle.com/datasets/mindsetvision/mindset-lite)**  (59 MB)
+**[MindSet Lite on Kaggle](https://www.kaggle.com/datasets/mindsetvision/mindset-lite)**  (~150 MB)
 
 
 ## Overview
