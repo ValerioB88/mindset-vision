@@ -145,6 +145,7 @@ If you need to generate the same dataset multiple times, each with different con
 output_folder = 'blabla/train'
 
 ["low_mid_level_vision/un_crowding.EVAL"]
+...
 output_folder = 'blabla/eval'
 ```
 In this example, `TRAIN` and `EVAL` are distinct identifiers that allow you to define different settings for the same dataset under the `low_mid_level_vision/un_crowding` category. Ensure that the main name remains consistent, as it is used to locate the corresponding dataset generation file in the `src/generate_datasets` folder.
