@@ -66,7 +66,7 @@ def generate_all(
     facemark.loadModel("assets/lbfmodel.yaml")
     with open(output_folder / "annotation.csv", "w", newline="") as annfile:
         writer = csv.writer(annfile)
-        writer.writerow(["Path", "Transformation", "FaceId"])
+        writer.writerow(["Path", "Condition", "FaceId"])
         for idx, image_path in tqdm(enumerate(face_folder.glob("*"))):
             image_facial_landmarks = get_image_facial_landmarks(image_path, facemark)
             image_name = image_path.stem

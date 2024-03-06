@@ -80,15 +80,17 @@ num_samples = 5000
 canvas_size = [ 224, 224,]
 # The folder containing the data. It will be created if doesn't exist. The default will match the folder structure used to create the dataset
 output_folder = "data/visual_illusions/grayscale_shapes"
+# The size of the arrow to place in the canvas
+arrow_size = 1
 
 # We provide a small face celebrity dataset using a subset of CelebA: https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html, but the user can specify any folder containing images of faces. Each image is resized according to parameters specified by the user and then reoriented into both an upright and a 180-degree inverted configuration. Furthermore, it is either 'Thatcherized' or unaltered. To `Thatcherize' an image we compute the landmarks of the eyes and the mouth, compute the bounding rectangle for each, and rotate them around their centre of mass. Blurring on the edge is applied to minimize artefacts.
-["visual_illusions/thatcher_illusion"]
+["visual_illusions/thatcher_illusion_face"]
 # The size of the canvas. If called through command line, a string in the format NxM.
 canvas_size = [ 224, 224,]
 # The folder containing faces that need to be Thatcherized. These faces will also be resized to `canvas_size` size.
 face_folder = "assets/celebA_sample/normal"
 # The folder containing the data. It will be created if doesn't exist. The default will match the folder structure used to create the dataset
-output_folder = "data/visual_illusions/thatcher_illusion"
+output_folder = "data/visual_illusions/thatcher_illusion_face"
 # What to do if the dataset folder is already present? Choose between [overwrite], [skip]
 behaviour_if_present = "overwrite"
 
@@ -130,6 +132,31 @@ steps_bg_color = 20
 # The folder containing the data. It will be created if doesn't exist. The default will match the folder structure used to create the dataset
 output_folder = "data/visual_illusions/lightness_contrast_illusion"
 
+# We employ a collection of 1000 natural English words or artificially generated sequences of random letters. All entries are uniformly presented in uppercase, covering a range from 3 to 8 letters in length. Words are always presented uppercase. The corpus contains words ranging from 3 to 8 letters. Following Wong et al. (2010), to simulate the Thatcher Effect for words, we rotate 180 degree one or more letters. To increase variability, each word is displayed in one of ten different fonts, with variable font sizes, and includes jitter on each letter. The configurable parameters include the number of words, the exact or range of letter counts per word, the number or range of letters to be rotated, the font size range, the level of jitter, and whether to use random strings or natural English words. REF: Wong, Yetta K, Elyssa Twedt, David Sheinberg, and Isabel Gauthier. `Does Thompson's Thatcher Effect Reflect a Face-Specific Mechanism?` Perception 39, no. 8 (1 August 2010): 1125-41. https://doi.org/10.1068/p6659.
+["visual_illusions/thatcher_illusion_words"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# The amount of translational jittery for each letter
+jittery = 0.04
+# Number of unique words to use. Each will be used `num_samples_per_word` times. Max is 1000 words.
+num_words = 100
+# --num_letters_per_word NUM_LETTERS_PER_WORD, -nlw NUM_LETTERS_PER_WORD Number of letters per word. The corpus used contains words from 3 to 7 letters. Either a range or a unique number. From command line, use the format MIN_MAX (inclusive) for ranges
+num_samples_per_word = 5
+num_letters_per_word = [ 5, 9,]
+# Number of letters to rotate for each word, capped at each word's length. From command line, use the format MIN_MAX (inclusive) for ranges
+num_letters_to_rotate = 2
+# The size(s) to use for the fonts. Could be a number or a range. From commad line, use the format MIN_MAX (inclusive) for ranges
+size_fonts = [ 18, 35,]
+use_random_words = false
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/visual_illusions/thatcher_illusion_words"
+
 # We provide one illusory condition, in which an oriented grating pattern is presented within a circular mask (`center grating') and a differently oriented grating is placed as the background (`context' grating); and two non-illusory conditions: one in which the background is uniformly colored and only a center mask contains the oriented grating pattern; and vice versa. The samples are varied in their orientation and frequency of the gratings, and in the size of the central grating.
 ["visual_illusions/tilt_illusion"]
 # The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
@@ -148,19 +175,6 @@ num_samples_only_context = 1000
 num_samples_center_context = 1000
 # The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
 output_folder = "data/visual_illusions/tilt_illusion"
-
-# We used the stimuli from Torfs et al. (2014) who developed a set of simple stimuli where background lines camouflaged geometric shapes to various extents. REF: Torfs, Katrien, Kathleen Vancleef, Christophe Lafosse, Johan Wagemans, and Lee De-Wit. 'The Leuven Perceptual Organization Screening Test (L-POST), an Online Test to Assess Mid-Level Visual Perception'. Behavior Research Methods 46, no. 2 (5 November 2014): 472-87. https://doi.org/10.3758/S13428-013-0382-6/
-["shape_and_object_recognition/leuven_camouflaged_shapes"]
-# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
-canvas_size = [ 224, 224,]
-# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
-background_color = [ 0, 0, 0,]
-# Specify whether we want to enable antialiasing
-antialiasing = true
-# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
-behaviour_if_present = "overwrite"
-# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
-output_folder = "data/shape_and_object_recognition/leuven_camouflaged_shapes"
 
 # This dataset consists of modification of line drawings (by default, we use line-drawings from Baker et al. (2018). The line drawings are 'dottified'. The user can specify the dots size and the distance between each dot. REF: Baker, Nicholas, Hongjing Lu, Gennady Erlikhman, and Philip J. Kellman. 'Deep Convolutional Networks Do Not Classify Based on Global Object Shape'. PLoS Computational Biology 14, no. 12 (2018): 1-43. https://doi.org/10.1371/journal.pcbi.1006613.
 ["shape_and_object_recognition/dotted_linedrawings"]
@@ -182,6 +196,19 @@ dot_distance = 5
 dot_size = 1
 # The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
 output_folder = "data/shape_and_object_recognition/dotted_linedrawings"
+
+# We used the stimuli from Torfs et al. (2014) who developed a set of simple stimuli where background lines camouflaged geometric shapes to various extents. REF: Torfs, Katrien, Kathleen Vancleef, Christophe Lafosse, Johan Wagemans, and Lee De-Wit. 'The Leuven Perceptual Organization Screening Test (L-POST), an Online Test to Assess Mid-Level Visual Perception'. Behavior Research Methods 46, no. 2 (5 November 2014): 472-87. https://doi.org/10.3758/S13428-013-0382-6/
+["shape_and_object_recognition/leuven_embedded_figures"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/leuven_embedded_figures"
 
 # We use the ETH-80 dataset (https://github.com/chenchkx/ETH-80/tree/master), which contains 8 different categories (apples, cars, cows,cups, dogs, horses, pears and tomatoes), each consisting of 10 object instances, each object captured from 41 different viewpoints. The ETH-80 dataset is automatically downloaded when this dataset is generated, if not already present.
 ["shape_and_object_recognition/viewpoint_invariance"]
@@ -241,6 +268,23 @@ image_input_folder = "assets/baker_2022_silhouettes/cropped"
 output_folder = "data/shape_and_object_recognition/silhouettes_from_silhouettes_baker_2022"
 # Either [silhouettes] or [linedrawings]. Default is [linedrawings]. Both are supposed to be blackstroke over a black canvas. If using linedrawings, they will first be converted into silhouettes.
 input_image_type = "silhouettes"
+
+# We developed our version of the Leuven Camouflaged Shapes from Torfs et al. (2014) by generating 5 irregular polygons and adding a set of lines to camouflage them. This consisted of pre-generated polygons and the polygons camouflaged by adding a variety of lines. Some of the added lines extends the lines that composed the polygon itself, and some have a slightly different slope than the polygon's lines. REF: Torfs, Katrien, Kathleen Vancleef, Christophe Lafosse, Johan Wagemans, and Lee De-Wit. 'The Leuven Perceptual Organization Screening Test (L-POST), an Online Test to Assess Mid-Level Visual Perception'. Behavior Research Methods 46, no. 2 (5 November 2014): 472-87. https://doi.org/10.3758/S13428-013-0382-6/
+["shape_and_object_recognition/embedded_figures"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# The number of samples to generate for each (embedded) polygons
+num_samples = 100
+# The shape of the embedded size (in pixels)
+shape_size = 45
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/embedded_figures"
 
 # This dataset consists of simple line-drawings. We use the line-drawing stimuli from Baker et al. (2018), consisting of 36 classes from ImageNet (one line- drawing per class). The line-drawings are white stroke on a uniform canvas (black by default). The user can specify a different line-drawing folders, which should consist of images of black strokes on a white background. REF: Baker, Nicholas, Hongjing Lu, Gennady Erlikhman, and Philip J. Kellman. 'Deep Convolutional Networks Do Not Classify Based on Global Object Shape'. PLoS Computational Biology 14, no. 12 (2018): 1-43. https://doi.org/10.1371/journal.pcbi.1006613.
 ["shape_and_object_recognition/linedrawings"]
@@ -310,23 +354,6 @@ scale = [ 0.5, 0.9,]
 rotation = [ 0, 360,]
 # Number of transformation for each object
 num_samples = 50
-
-# We developed our version of the Leuven Camouflaged Shapes from Torfs et al. (2014) by generating 5 irregular polygons and adding a set of lines to camouflage them. This consisted of pre-generated polygons and the polygons camouflaged by adding a variety of lines. Some of the added lines extends the lines that composed the polygon itself, and some have a slightly different slope than the polygon's lines. REF: Torfs, Katrien, Kathleen Vancleef, Christophe Lafosse, Johan Wagemans, and Lee De-Wit. 'The Leuven Perceptual Organization Screening Test (L-POST), an Online Test to Assess Mid-Level Visual Perception'. Behavior Research Methods 46, no. 2 (5 November 2014): 472-87. https://doi.org/10.3758/S13428-013-0382-6/
-["shape_and_object_recognition/camouflaged_shapes"]
-# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
-canvas_size = [ 224, 224,]
-# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
-background_color = [ 0, 0, 0,]
-# Specify whether we want to enable antialiasing
-antialiasing = true
-# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
-behaviour_if_present = "overwrite"
-# The number of samples to generate for each (embedded) polygons
-num_samples = 100
-# The shape of the embedded size (in pixels)
-shape_size = 45
-# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
-output_folder = "data/shape_and_object_recognition/camouflaged_shapes"
 
 ["shape_and_object_recognition/same_different_task"]
 # The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
@@ -404,7 +431,7 @@ antialiasing = false
 # What to do if the dataset folder is already present? Choose between [overwrite], [skip]
 behaviour_if_present = "overwrite"
 # Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
-object_longest_side = 200
+object_longest_side = 120
 # A folder containing the image input types (linedrawings/silhouettes). We assume these to be black strokes-on-white canvas simple contour drawings.
 image_input_folder = "assets/baker_2018_linedrawings/cropped/"
 # The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
@@ -423,7 +450,7 @@ antialiasing = false
 # What to do if the dataset folder is already present? Choose between [overwrite], [skip]
 behaviour_if_present = "overwrite"
 # Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
-object_longest_side = 200
+object_longest_side = 120
 # A folder containing the image input types (linedrawings/silhouettes). We assume these to be black strokes-on-white canvas simple contour drawings.
 image_input_folder = "assets/baker_2022_silhouettes/cropped"
 # The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
@@ -442,7 +469,7 @@ antialiasing = false
 # What to do if the dataset folder is already present? Choose between [overwrite], [skip]
 behaviour_if_present = "overwrite"
 # Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
-object_longest_side = 200
+object_longest_side = 120
 # A folder containing the image input types (linedrawings/silhouettes). We assume these to be black strokes-on-white canvas simple contour drawings.
 image_input_folder = "assets/baker_2018_linedrawings/cropped/"
 # The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
@@ -504,24 +531,6 @@ width = 2
 # The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
 output_folder = "data/low_mid_level_vision/weber_law"
 
-["low_mid_level_vision/amodal_completion"]
-# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
-canvas_size = [ 224, 224,]
-# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
-background_color = [ 100, 100, 100,]
-# Specify whether we want to enable antialiasing
-antialiasing = true
-# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
-behaviour_if_present = "overwrite"
-# Each `sample` corresponds to an entire set of pair of shape_based_image_generation, for each condition.
-num_samples = 50
-# The color of the circle object. If called from command line, the RGB value must be a string in the form R_G_B, e.g. 255_0_125. Write `random` to have a random color.
-circle_color = [ 255, 255, 255,]
-# The color of the square object. If called from command line, the RGB value must be a string in the form R_G_B, e.g. 255_0_125. Write `random` to have a random color.
-square_color = [ 0, 0, 0,]
-# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
-output_folder = "data/low_mid_level_vision/amodal_completion"
-
 # 3D Geon stimuli originally used in Kayaert et al. (2003) and obtained from https://geon.usc.edu/~ori. A feature dimension (such as the curvature of a Geon) is altered from a singular value (e.g. straight contour with 0 curvature) to two different values (e.g. slightly curved or very curved). The `reference` condition is the item with the intermediate value; the `MP change` condition consists of the sample with a greater non-singular value (that is, from slight curvature to greater curvature, which corresponds to a MP change), and the `NAP` change condition includes the samples with the singular value (that is, from slight curvature to non curvature, which corresponds to a NAP change). REF:Kayaert, Greet, Irving Biederman, and Rufin Vogels. 'Shape Tuning in Macaque Inferior Temporal Cortex'. Journal of Neuroscience 23, no. 7 (1 April 2003): 3016-27. https://doi.org/10.1523/JNEUROSCI.23-07-03016.2003.
 ["low_mid_level_vision/NAP_vs_MP_3D_geons.0"]
 # The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
@@ -579,7 +588,25 @@ shape_folder = "assets/amir_geons/cropped/NAPvsMP_silhouettes"
 # Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
 object_longest_side = 200
 
-# The dataset consists of images containing simple two parts. There are three `split' conditions and two `familiarity' conditions. The `split' conditions are: `no split` in which two parts are touching at one point but not overlapping; `natural split`, in which two parts are separated; `unnatural split` in which the two parts are touching each other as in the `no split` condition, but one of the parts is `cut' and separated from the rest. The items are silhouettes uniformly coloured on a uniform background, and they can be either familiar or unfamiliar shapes. The familiar shapes consist of the following objects: circle, square, rectangle, triangle, heptagon, and a 50-degree arc segment; the unfamiliar shapes consist of blob-like objects. Within each familiar/unfamiliar condition, all possible combinations of two shapes are used (e.g. a triangle with a rectangle). Configuration parameters include the distance between the pieces in the `unnatural split' and `natural split' condition, the colour of the items, and the number of different blob- like objects to use for the unfamiliar condition.
+["low_mid_level_vision/amodal_completion"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 100, 100, 100,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Each `sample` corresponds to an entire set of pair of shape_based_image_generation, for each condition.
+num_samples = 5
+# The color of the circle object. If called from command line, the RGB value must be a string in the form R_G_B, e.g. 255_0_125. Write `random` to have a random color.
+circle_color = [ 255, 255, 255,]
+# The color of the square object. If called from command line, the RGB value must be a string in the form R_G_B, e.g. 255_0_125. Write `random` to have a random color.
+square_color = [ 0, 0, 0,]
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/low_mid_level_vision/amodal_completion"
+
+# The dataset consists of a variation of the images used in Jacobs et al (2021): instead of a single object composed of two parts, we used two object at a single point of contact. There are three `split' conditions and two `familiarity' conditions. The `split' conditions are: `no split` in which two parts are touching at one point but not overlapping; `natural split`, in which two parts are separated; `unnatural split` in which the two parts are touching each other as in the `no split` condition, but one of the parts is `cut' and separated from the rest. The items are silhouettes uniformly coloured on a uniform background, and they can be either familiar or unfamiliar shapes. The familiar shapes consist of the following objects: circle, square, rectangle, triangle, heptagon, and a 50-degree arc segment; the unfamiliar shapes consist of blob-like objects. Within each familiar/unfamiliar condition, all possible combinations of two shapes are used (e.g. a triangle with a rectangle). Configuration parameters include the distance between the pieces in the `unnatural split' and `natural split' condition, the colour of the items, and the number of different blob-like objects to use for the unfamiliar condition.
 ["low_mid_level_vision/decomposition"]
 # The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
 canvas_size = [ 224, 224,]

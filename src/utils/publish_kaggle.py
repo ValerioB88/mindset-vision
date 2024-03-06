@@ -22,7 +22,7 @@ def publish(data_type="full"):
 
     metadata = {
         "title": title,
-        "id": f"Valerio1988/{slug}",
+        "id": f"MindSetVision/{slug}",
         "licenses": [{"name": "CC0-1.0"}],
     }
 
