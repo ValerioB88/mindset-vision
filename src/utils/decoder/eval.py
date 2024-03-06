@@ -100,11 +100,11 @@ def decoder_evaluate(
                         "image_path": path[i],
                         "label": labels[i].item(),
                         **{
-                            f"prediction_dec_{dec_idx}": torch.argmax(
-                                out_dec[dec_idx][i]
-                            ).item()
-                            if task_type == "classification"
-                            else out_dec[dec_idx][i].item()
+                            f"prediction_dec_{dec_idx}": (
+                                torch.argmax(out_dec[dec_idx][i]).item()
+                                if task_type == "classification"
+                                else out_dec[dec_idx][i].item()
+                            )
                             for dec_idx in range(num_decoders)
                         },
                     }
