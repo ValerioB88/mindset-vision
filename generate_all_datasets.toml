@@ -197,6 +197,21 @@ dot_size = 1
 # The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
 output_folder = "data/shape_and_object_recognition/dotted_linedrawings"
 
+# This is a simple recreationg (with additional configuration parameters) of the stimuli presented in Baker et al. 2022, including 9 classes from ImageNet, each containing 40 samples. We also offer a script designed to apply a similar transformation to any line drawings or silhouette samples (see ../global_change). REF: Baker, Nicholas, and James H. Elder. 'Deep Learning Models Fail to Capture the Configural Nature of Human Shape Perception'. iScience 25, no. 9 (16 September 2022). https://doi.org/10.1016/J.ISCI.2022.104913.
+["shape_and_object_recognition/global_change_baker2022"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "data/shape_and_object_recognition/global_change_baker2022"
+
 # We used the stimuli from Torfs et al. (2014) who developed a set of simple stimuli where background lines camouflaged geometric shapes to various extents. REF: Torfs, Katrien, Kathleen Vancleef, Christophe Lafosse, Johan Wagemans, and Lee De-Wit. 'The Leuven Perceptual Organization Screening Test (L-POST), an Online Test to Assess Mid-Level Visual Perception'. Behavior Research Methods 46, no. 2 (5 November 2014): 472-87. https://doi.org/10.3758/S13428-013-0382-6/
 ["shape_and_object_recognition/leuven_embedded_figures"]
 # The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
@@ -420,7 +435,7 @@ grid_thickness = 4
 # The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
 output_folder = "data/shape_and_object_recognition/segmented_images"
 
-# This dataset is inspired by Baker and Elder (2022). Instead of replicating their dataset , we wrote a script to automatically generate fragmented and `Frankenstein' versions of a silhouette or a line drawing. In the pre- generated version, we apply this script to the dataset (9 classes from ImageNet, each containing 40 samples), obtaining a dataset that is very similar to the aforementioned work. The user can specify their own line drawing or silhouette folder, to generate a different variety of fragmented or Frankenstein images. REF: Baker, Nicholas, and James H. Elder. 'Deep Learning Models Fail to Capture the Configural Nature of Human Shape Perception'. iScience 25, no. 9 (16 September 2022). https://doi.org/10.1016/J.ISCI.2022.104913.
+# This dataset is inspired by Baker and Elder (2022). Instead of replicating their dataset , we wrote a script to automatically generate fragmented and `Frankenstein' versions of a silhouette or a line drawing. The user can specify their own line drawing or silhouette folder, to generate a different variety of fragmented or Frankenstein images. We also provide a simple replication of Baker et al. 2022 stimuli in ../global_change_baker2022. REF: Baker, Nicholas, and James H. Elder. 'Deep Learning Models Fail to Capture the Configural Nature of Human Shape Perception'. iScience 25, no. 9 (16 September 2022). https://doi.org/10.1016/J.ISCI.2022.104913.
 ["shape_and_object_recognition/global_change.0"]
 # The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
 canvas_size = [ 224, 224,]
@@ -439,7 +454,7 @@ output_folder = "data/shape_and_object_recognition/global_change_from_linedrawin
 # Use 1 to convert to silhouettes, 0 to not convert. Set to 0 if the images are already silhouettes!
 convert_to_silhouettes = 0
 
-# This dataset is inspired by Baker and Elder (2022). Instead of replicating their dataset , we wrote a script to automatically generate fragmented and `Frankenstein' versions of a silhouette or a line drawing. In the pre- generated version, we apply this script to the dataset (9 classes from ImageNet, each containing 40 samples), obtaining a dataset that is very similar to the aforementioned work. The user can specify their own line drawing or silhouette folder, to generate a different variety of fragmented or Frankenstein images. REF: Baker, Nicholas, and James H. Elder. 'Deep Learning Models Fail to Capture the Configural Nature of Human Shape Perception'. iScience 25, no. 9 (16 September 2022). https://doi.org/10.1016/J.ISCI.2022.104913.
+# This dataset is inspired by Baker and Elder (2022). Instead of replicating their dataset , we wrote a script to automatically generate fragmented and `Frankenstein' versions of a silhouette or a line drawing. The user can specify their own line drawing or silhouette folder, to generate a different variety of fragmented or Frankenstein images. We also provide a simple replication of Baker et al. 2022 stimuli in ../global_change_baker2022. REF: Baker, Nicholas, and James H. Elder. 'Deep Learning Models Fail to Capture the Configural Nature of Human Shape Perception'. iScience 25, no. 9 (16 September 2022). https://doi.org/10.1016/J.ISCI.2022.104913.
 ["shape_and_object_recognition/global_change.1"]
 # The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
 canvas_size = [ 224, 224,]
@@ -458,7 +473,7 @@ output_folder = "data/shape_and_object_recognition/global_change_from_silhouette
 # Use 1 to convert to silhouettes, 0 to not convert. Set to 0 if the images are already silhouettes!
 convert_to_silhouettes = 0
 
-# This dataset is inspired by Baker and Elder (2022). Instead of replicating their dataset , we wrote a script to automatically generate fragmented and `Frankenstein' versions of a silhouette or a line drawing. In the pre- generated version, we apply this script to the dataset (9 classes from ImageNet, each containing 40 samples), obtaining a dataset that is very similar to the aforementioned work. The user can specify their own line drawing or silhouette folder, to generate a different variety of fragmented or Frankenstein images. REF: Baker, Nicholas, and James H. Elder. 'Deep Learning Models Fail to Capture the Configural Nature of Human Shape Perception'. iScience 25, no. 9 (16 September 2022). https://doi.org/10.1016/J.ISCI.2022.104913.
+# This dataset is inspired by Baker and Elder (2022). Instead of replicating their dataset , we wrote a script to automatically generate fragmented and `Frankenstein' versions of a silhouette or a line drawing. The user can specify their own line drawing or silhouette folder, to generate a different variety of fragmented or Frankenstein images. We also provide a simple replication of Baker et al. 2022 stimuli in ../global_change_baker2022. REF: Baker, Nicholas, and James H. Elder. 'Deep Learning Models Fail to Capture the Configural Nature of Human Shape Perception'. iScience 25, no. 9 (16 September 2022). https://doi.org/10.1016/J.ISCI.2022.104913.
 ["shape_and_object_recognition/global_change.2"]
 # The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
 canvas_size = [ 224, 224,]
