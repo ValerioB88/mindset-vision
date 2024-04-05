@@ -220,7 +220,7 @@ def generate_all(
 
 
 if __name__ == "__main__":
-    description = "This dataset is inspired by Baker and Elder (2022). Instead of replicating their dataset , we wrote a script to automatically generate fragmented and `Frankenstein' versions of a silhouette or a line drawing. In the pre-generated version, we apply this script to the  dataset (9 classes from ImageNet, each containing 40 samples), obtaining a dataset that is very similar to the aforementioned work. The user can specify their own line drawing or silhouette folder, to generate a different variety of fragmented or Frankenstein images.\nREF: Baker, Nicholas, and James H. Elder. 'Deep Learning Models Fail to Capture the Configural Nature of Human Shape Perception'. iScience 25, no. 9 (16 September 2022). https://doi.org/10.1016/J.ISCI.2022.104913."
+    description = "This dataset is inspired by Baker and Elder (2022). Instead of replicating their dataset , we wrote a script to automatically generate fragmented and `Frankenstein' versions of a silhouette or a line drawing. The user can specify their own line drawing or silhouette folder, to generate a different variety of fragmented or Frankenstein images. We also provide a simple replication of Baker et al. 2022 stimuli in ../global_change_baker2022. \nREF: Baker, Nicholas, and James H. Elder. 'Deep Learning Models Fail to Capture the Configural Nature of Human Shape Perception'. iScience 25, no. 9 (16 September 2022). https://doi.org/10.1016/J.ISCI.2022.104913."
     parser = argparse.ArgumentParser(
         description=description, formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
