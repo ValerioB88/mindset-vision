@@ -22,18 +22,10 @@ Training the decoders necessitates the management of various parameters, facilit
 
 ## Examples
 We provide two examples, one with a regression task, and one with a classification task. In both cases, we don't provide the trained network, but only the scripts to train and test the networks yourself. This can be used as a template for further testing. 
+In both examples we generate a dataset in the `examples/data/` folder. The `eval.toml` and `train.toml` file will then point to the corresponding dataset, and in particular to the dataset's annotation file (e.g. `examples/data/shape_and_object_recognition/embedded_figures/annotation.csv`). Run `train.py` first and then `eval.py`. This is just an illustrative example with few samples: for real life experiments we suggest using a much more sizeable dataset for training.
 
-- ### Regression: ### 
- The regression task trains a linear decoders on the jastrow_illusion dataset, showing a real-life instance of the process. in [`jastrow_train.py`](./examples/regression/jastrow_train.py). To run this example you need to have the Jastrow dataset and point the [`jastrow_regression_train.toml`](./examples/regression/jastrow_regression_train.toml)[`training`][`annotation_file`] parameter to the appropriate `annotation.csv` file. In [`jastrow_train.py`](./examples/regression/jastrow_train.py) we combine two columns from the annotation file to generate a column representing the difference between the two, serving as the dependent variable for prediction based on the input image. 
-In [`jastrow_eval.py`](./examples/regression/jastrow_eval.py) we load the trained model (specified in the  [`jastrow_regression_eval.toml`](./examples/regression/jastrow_regression_eval.toml)[`network`][`state_dict_path`]) and test it on the illusory stimuli. 
-
-- ### Classification ### 
-Whereas for classification is quite common to exploit the `PyTorch` `ImageFolder` class, here we don't use it, relying on the `annotation.csv` file instead to obtain images. This is done in order to be agnostic to the folder-structure you decide to use, and to be consistent with the rest of the codebase (which also uses the `annotation.csv` file). 
-We use the `Embedded_figures` dataset as an example for classification. First run [`examples/classificaiton/embedded_figures_train.py`](./examples/classification/embedded_figures_train.py). Then, when it's finished, run [`examples/classification/embedded_figures_eval.py`](./examples/classification/embedded_figures_eval.py).
-
-
-
-
+- ### Notes about Classification ### 
+Whereas for classification is quite common to exploit the `PyTorch` `ImageFolder` class, here we don't use it, relying again on the `annotation.csv` file instead to point to image paths. This is done in order to be agnostic to the folder-structure and to be consistent with the rest of the codebase (which also uses the `annotation.csv` file). 
 
 
 ## Training Loop Info
@@ -52,7 +44,7 @@ Interrupting training with `CTRL+C` should actually end the training gracefully:
 
 ### Monitoring with Neptune.ai
 [Neptune.ai](www.neptune.ai) is a tool for logging experiments on the web. You don't need to use Neptune, but my training loop codebase is well integrated with it: it will save sample images and log training/testing charts in the Neptune page.
-If you have an account, set `--neptune_proj_name` to your project name (which must be created through the UI). Also follow the instruction to install the neptune-client and setup the API.  
+If you have an account, set `--neptune_proj_name` to your project name (which must be created through the UI). Also follow the instruction to install the neptune-client and setup the API. Using neptune is optional.  
 
 ## Decoder Placement 
 ```python

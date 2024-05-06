@@ -1,0 +1,23 @@
+[basic_info]
+annotation_file_path = 'examples/data/shape_and_object_recognition/texturized_blobs/annotation.csv'
+match_factors = ["BlobID"]
+factor_variable = "IsTexturized"
+reference_level = false
+add_columns = ['FontSize']
+
+[options]
+pretraining = "ImageNet"
+
+[saving_folders]
+results_folder = "examples/results/similarity_judgment/texturized_blobs/blob_vs_same_blob_texturized"
+
+[transformation]
+fill_color = [0, 0, 0]
+matching_transform = true
+repetitions = 20
+
+[transformation.values]
+translation_X = [-0.2, 0.2]
+translation_Y = [-0.2, 0.2]
+scale = [1.0, 1.5]
+rotation = [0, 360]

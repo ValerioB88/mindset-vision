@@ -1,0 +1,32 @@
+task_type = "regression"
+
+[network]
+state_dict_path = "examples/models/decoder/ebbinghaus/trained_model/finished_model.pt"
+batch_size = 16
+
+[saving_folders]
+results_folder = "examples/results/decoder/ebbinghaus"
+
+
+[[eval.datasets]]
+name = "eval_illusory_big_flankers"
+annotation_file = "examples/data/visual_illusions/ebbinghaus_illusion/eval/annotation.csv"
+img_path_col_name = "Path"
+label_cols = ["NormSizeCenterCircle"]
+filters = { Category = "big_flankers" }
+
+
+[[eval.datasets]]
+name = "eval_scrambled"
+annotation_file = "examples/data/visual_illusions/ebbinghaus_illusion/eval/annotation.csv"
+img_path_col_name = "Path"
+label_cols = ["NormSizeCenterCircle"]
+filters = { Category = "scrambled_circles" }
+
+
+[[eval.datasets]]
+name = "eval_illusory_small_flankers"
+annotation_file = "examples/data/visual_illusions/ebbinghaus_illusion/eval/annotation.csv"
+img_path_col_name = "Path"
+label_cols = ["NormSizeCenterCircle"]
+filters = { Category = "small_flankers" }

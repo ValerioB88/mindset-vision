@@ -1,0 +1,16 @@
+# We developed our version of the Leuven Camouflaged Shapes from Torfs et al. (2014) by generating 5 irregular polygons and adding a set of lines to camouflage them. This consisted of pre-generated polygons and the polygons camouflaged by adding a variety of lines. Some of the added lines extends the lines that composed the polygon itself, and some have a slightly different slope than the polygon's lines. REF: Torfs, Katrien, Kathleen Vancleef, Christophe Lafosse, Johan Wagemans, and Lee De-Wit. 'The Leuven Perceptual Organization Screening Test (L-POST), an Online Test to Assess Mid-Level Visual Perception'. Behavior Research Methods 46, no. 2 (5 November 2014): 472-87. https://doi.org/10.3758/S13428-013-0382-6/
+["shape_and_object_recognition/embedded_figures"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# The number of samples to generate for each (embedded) polygons
+num_samples = 100
+# The shape of the embedded size (in pixels)
+shape_size = 45
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "examples/data/shape_and_object_recognition/embedded_figures"

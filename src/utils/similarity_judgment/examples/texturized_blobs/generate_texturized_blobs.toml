@@ -1,0 +1,23 @@
+
+["shape_and_object_recognition/texturized_blobs"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# The number of augmented samples to generate for each line drawings
+num_samples_per_blob = 5
+num_blobs = 5
+# Specify the value to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 200
+# The character to be used as background. Use `random` to use a random character for each sample
+background_char = " "
+# The character to be used as foreground. Write `random` to use a different character for each image
+foreground_char = "random"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "examples/data/shape_and_object_recognition/texturized_blobs"
+# If a number, it defines the size of the font for all images. It can be a string in the form A_B, in which case the size will be drawn from a uniform(A, B) distribution for each image
+font_size = [ 15, 20,]

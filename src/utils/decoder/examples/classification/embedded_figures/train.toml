@@ -1,0 +1,40 @@
+task_type = "classification"
+
+[training]
+train_id = "trained_model"
+evaluate_during_training = false
+save_at_epoch_end = false
+
+[training.stopping_conditions]
+stop_after_n_epochs = 20
+
+[training.dataset]
+name = "polygons"
+annotation_file = "examples/data/shape_and_object_recognition/embedded_figures/annotation.csv"
+img_path_col_name = "Path"
+label_cols = ["PolygonId"]
+filters = { Type = "polygon" }
+
+[training.monitoring]
+neptune_proj_name = false
+
+[saving_folders]
+results_folder = "results/examples/decoder/embedded_figures_classification"
+model_output_folder = "models/examples/decoder/embedded_figures_classification"
+
+
+[[eval.datasets]]
+name = "embedded"
+annotation_file = "examples/data/shape_and_object_recognition/embedded_figures/annotation.csv"
+img_path_col_name = "Path"
+label_cols = ["PolygonId"]
+filters = { Type = "embedded_polygon" }
+
+
+[transformation]
+fill_color = [0, 0, 0]
+[transformation.values]
+translation_X = [-0.2, 0.2]
+translation_Y = [-0.2, 0.2]
+scale = [0.7, 1.3]
+rotation = [0, 360]

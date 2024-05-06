@@ -1,0 +1,22 @@
+[basic_info]
+annotation_file_path = 'examples/data/low_mid_level_vision/relational_vs_coordinate/annotation.csv'
+match_factors = ['Id']
+factor_variable = "Class"
+reference_level = "basis"
+
+[options]
+pretraining = "ImageNet"
+
+[saving_folders]
+results_folder = "examples/results/similarity_judgment/relational_vs_coordinate"
+
+[transformation]
+fill_color = [0, 0, 0]
+matching_transform = true
+repetitions = 20
+
+[transformation.values]
+translation_X = [-0.2, 0.2]
+translation_Y = [-0.2, 0.2]
+scale = [1.0, 1.5]
+rotation = [0, 360]

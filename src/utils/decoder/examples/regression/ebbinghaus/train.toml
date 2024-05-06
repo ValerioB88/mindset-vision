@@ -1,0 +1,45 @@
+task_type = "regression"
+
+[training]
+train_id = "trained_model"
+evaluate_during_training = false
+
+[training.dataset]
+name = "train_random"
+annotation_file = "examples/data/visual_illusions/ebbinghaus_illusion/train/annotation.csv"
+img_path_col_name = "Path"
+label_cols = ["NormSizeCenterCircle"]
+filters = { Category = "scrambled_circles" }
+
+[training.monitoring]
+neptune_proj_name = false
+
+[saving_folders]
+results_folder = "examples/results/decoder/ebbinghaus"
+model_output_folder = "examples/models/decoder/ebbinghaus"
+
+[training.stopping_conditions]
+stop_after_n_epochs = 5
+
+# # Since training.evaluate_during_training is false, these two datasets won't be evaluated. 
+# [[eval.datasets]]
+# name = "eval_aligned"
+# annotation_file = "datasets_examples/jastrow_illusion/annotation_w_diff.csv"
+# img_path_col_name = "Path"
+# label_cols = ["DiffSizeTopBottom"]
+# filters = { Type = "aligned" }
+
+
+# [[eval.datasets]]
+# name = "val_illusory"
+# annotation_file = "datasets_examples/jastrow_illusion/annotation_w_diff.csv"
+# img_path_col_name = "Path"
+# label_cols = ["DiffSizeTopBottom"]
+# filters = { Type = "illusory" }
+
+[transformation.values]
+
+translation_X = false
+translation_Y = false
+scale = false
+rotation = false

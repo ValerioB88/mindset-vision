@@ -1,0 +1,16 @@
+
+["low_mid_level_vision/relational_vs_coordinate"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = false
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Specify the value in pixels to which the longest side of the line drawings will be resized (keeping the aspect ratio), before pasting the image into a canvas
+object_longest_side = 120
+# A folder containing the hummel-stankiewicz stimuli
+input_folder = "assets/hummel_stankiewicz_1996/pngs"
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "examples/data/low_mid_level_vision/relational_vs_coordinate"

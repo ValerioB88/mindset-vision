@@ -1,0 +1,25 @@
+["visual_illusions/ebbinghaus_illusion.TRAIN"]
+# The size of the canvas. If called through command line, a string in the format NxM eg `224x224`.
+canvas_size = [ 224, 224,]
+# Specify the background color. Could be a list of RGB values, or `rnd-uniform` for a random (but uniform) color. If called from command line, the RGB value must be a string in the form R_G_B
+background_color = [ 0, 0, 0,]
+# Specify whether we want to enable antialiasing
+antialiasing = true
+# What to do if the dataset folder is already present? Choose between [overwrite], [skip]
+behaviour_if_present = "overwrite"
+# Each `sample` corresponds to an entire set of pair of shape_based_image_generation, for each condition.
+num_samples_illusory = 0
+num_samples_scrambled = 0 # 100000
+
+# The folder containing the data. It will be created if doesn't exist. The default will match the folder structure of the generation script
+output_folder = "examples/data/visual_illusions/ebbinghaus_illusion/train"
+
+
+["visual_illusions/ebbinghaus_illusion.EVAL"]
+canvas_size = [ 224, 224,]
+background_color = [ 0, 0, 0,]
+antialiasing = true
+behaviour_if_present = "overwrite"
+num_samples_illusory = 500
+num_samples_scrambled = 500
+output_folder = "examples/data/visual_illusions/ebbinghaus_illusion/eval"

@@ -6,7 +6,7 @@ This method allows the analysis of the internal activation of a network when fed
 
 
 ## Getting Started
-The best way to get started is to take a look at the provided example in [`the example folder`](/home/ft20308/mind-set/src/utils/similarity_judgment/examples). Here the Similarity Judgment Method is applied to the `Relational vs Coordinate dataset`. Just running the script [relational_vs_coordinate.py](examples/relational_vs_coordinate.py) as a module (as usual, from the root folder) should be enough: it will use [`this config file`](examples/generate_relational_vs_coordinate_dataset.toml) to compute the Euclidean Distance for many pair of images on the corresponding dataset (using its `annotation.csv` file), generating a report in `examples/results/relational_vs_coordinate`. 
+The best way to get started is to take a look at the provided example in [`the example folder`](examples). Here the Similarity Judgment Method is applied to the `Relational vs Coordinate dataset`. Just running the script [relational_vs_coordinate.py](examples/relational_vs_coordinate.py) as a module (as usual, from the root folder) should be enough: it will use [`this config file`](examples/generate_relational_vs_coordinate_dataset.toml) to compute the Euclidean Distance for many pair of images on the corresponding dataset (using its `annotation.csv` file), generating a report in `examples/results/relational_vs_coordinate`. 
 Note that if the dataset doesn't exist, it will create it using [this other config file](examples/generate_relational_vs_coordinate_dataset.toml).
 
 In brief, the way this works is that each level of the indicated `factor_variable` will be compared against each other level. Stimuli will be matched according to the `match_factors` parameters. 
@@ -34,14 +34,14 @@ Let's consider the `Relational vs Coordinate` dataset. Once the dataset is creat
  Note how each of the `Class` level contains 6 images (specified by the `Id` factor - only 3 showed in the table above). 
 The user indicates against which reference level the other levels needs to be compare: so specifying `factor_variable="Class"` and `reference_level = "basis"` will result in images from the `coordinate` level and in the `metric` to be compared against each image in the `basis` level. If we want to make sure that only the images with the same ID are compared (for example, the basis image `Id=3` with the coordinate change image `Id=3`), we need to specify `match_factors = ["Id"]`. Note that you can have multiple matching factors, or None. The [defeault_distance_config](default_distance_config.toml) file contains a complete documentation of each configuration parameter. The generated report works best when there are at least 3 leves for the factor of interest (in which one is the reference level). In this way, you will have at least 2 samples to compare (in the form of boxplots). 
 
-Not all type of similarity analysis might match this structure. For example, the `texturized_blob` (another [example](/home/ft20308/mind-set/src/utils/similarity_judgment/examples)) involves a slightly more complex setup and analysis. 
+Not all type of similarity analysis might match this structure. For example, the `texturized_blob` (another [example](examples) involves a slightly more complex setup and analysis. 
 
 
 ## Code Overview
 
 ### Main Function
 
-The main function is `compute_distance` in `srcutils/similarity_judgment/run.py`. This function requires a set of parameters that can be provided through a `toml` file (e.g. [`this example toml file`](./examples//sim_judgm_relational_vs_coordinate.toml)). The `toml` file will refer to an `annotation.csv` file, which is automatically created when a dataset is generated. For example, the example toml file refers to the [`examples/data/low_mid_level_vision/relational_vs_coordinate/annotation.csv`](../../../examples/data/low_mid_level_vision/relational_vs_coordinate/annotation.csv) file.
+The main function is `compute_distance` in `srcutils/similarity_judgment/run.py`. This function requires a set of parameters that can be provided through a `toml` file (e.g. [`this example toml file`](./examples//sim_judgm_relational_vs_coordinate.toml)). The `toml` file will refer to an `annotation.csv` file, which is  created with the dataset. Both are generated as part of the example file, if not present.
 
 ### Configuration Parameters
 
