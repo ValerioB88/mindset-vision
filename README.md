@@ -3,7 +3,7 @@
 
 
 ### TL;DR: Just gimme the datasets!
-**[MindSet Large on Kaggle](https://www.kaggle.com/datasets/mindsetvision/mindset)** (~1.3 GB)
+**[MindSet Large on Kaggle](https://www.kaggle.com/datasets/mindsetvision/mindset)** (~0.5 GB)
 
 
 **[MindSet Lite on Kaggle](https://www.kaggle.com/datasets/mindsetvision/mindset-lite)**  (~150 MB)
