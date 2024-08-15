@@ -16,11 +16,13 @@ The `MindSet: Vision` datasets are designed to facilitate the testing of DNNs ag
 
 ## Datasets
 
-`MindSet: Vision` datasets are divided into three categories: `low_mid_level_vision`, `visual_illusions`, and `shape_and_object_recognition`. Each of this category contains many datasets. You can explore and download the datasets in Kaggle. A detailed description of each dataset can be found in the related paper (*IN PREPARATION*) or in the comments in the [TOML file](generate_all_datasets.toml), together with all the configurable parameters. If you want to take a look at sample images from every dataset, we recommend you download [this HTML page](https://htmlpreview.github.io/?https://github.com/MindSetVision/mindset-vision/blob/master/tests/small_black_bg/summary.html).
+`MindSet: Vision` datasets are divided into three categories: `low_mid_level_vision`, `visual_illusions`, and `shape_and_object_recognition`. Each of this category contains many datasets. You can explore and download the datasets in Kaggle. A detailed description of each dataset can be found in the related paper [here](https://openreview.net/forum?id=bAaM8cKoMl#discussion) or in the comments in the [TOML file](generate_all_datasets.toml), together with all the configurable parameters. If you want to take a look at sample images from every dataset, we recommend you download [this HTML page](https://htmlpreview.github.io/?https://github.com/MindSetVision/mindset-vision/blob/master/tests/small_black_bg/summary.html).
 
 The datasets are structured into subfolders (conditions), which are organized based on the dataset's specific characteristics. At the root of each dataset, there's an `annotation.csv` file. This file lists the paths to individual images (starting from the dataset folder) along with their associated parameters. Such organization enables users to use the datasets either exploting their folder structure (e.g. through PyTorch's  ImageFolder) or by directly referencing the annotation file.
 
  In our provided Decoder, Classification and Similarity Judgment methods we always use the `annotation.csv` approach.
+
+ 
 
 ### Ready-To-Download Version
 
